@@ -164,7 +164,7 @@ export function ProductForm({ categories, product, action, notice }: Props) {
               type="checkbox"
               checked={limitPerOrder}
               onChange={(e) => setLimitPerOrder(e.target.checked)}
-              className="h-5 w-5 accent-ember"
+              className="h-5 w-5 shrink-0 accent-ember"
             />
             <span className="font-medium">Limit per order</span>
           </label>
@@ -191,7 +191,7 @@ export function ProductForm({ categories, product, action, notice }: Props) {
               type="checkbox"
               checked={limitStock}
               onChange={(e) => setLimitStock(e.target.checked)}
-              className="h-5 w-5 accent-ember"
+              className="h-5 w-5 shrink-0 accent-ember"
             />
             <span className="font-medium">Limited stock</span>
           </label>
@@ -256,7 +256,7 @@ function Toggle({
 }) {
   return (
     <label className="flex items-start gap-3">
-      <input type="checkbox" name={name} defaultChecked={defaultChecked} className="mt-0.5 h-5 w-5 accent-ember" />
+      <input type="checkbox" name={name} defaultChecked={defaultChecked} className="mt-0.5 h-5 w-5 shrink-0 accent-ember" />
       <span>
         <span className="block font-medium">{label}</span>
         <span className="block text-sm text-ink-soft">{hint}</span>

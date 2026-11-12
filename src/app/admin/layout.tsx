@@ -15,13 +15,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="flex flex-1 flex-col">
       <header className="sticky top-0 z-10 border-b border-line bg-char text-parchment">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3">
-          <Link href="/admin" className="font-display text-xl font-bold">
+        <div className="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4">
+          <Link href="/admin" className="font-display text-xl font-bold whitespace-nowrap">
             Smoked Style
           </Link>
           <nav className="flex flex-1 gap-1 text-sm">
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className="rounded-md px-3 py-1.5 hover:bg-white/10">
+              <Link key={l.href} href={l.href} className="whitespace-nowrap rounded-md px-3 py-1.5 hover:bg-white/10">
                 {l.label}
               </Link>
             ))}
