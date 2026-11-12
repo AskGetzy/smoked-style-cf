@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "smoked-style",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    // Must match "name" above
+    { "binding": "WORKER_SELF_REFERENCE", "service": "smoked-style" }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "smokedstyle",
+      "database_id": "fab6597d-c532-4b94-aa67-b225173f9f73",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    // Product photos
+    { "binding": "PHOTOS", "bucket_name": "smokedstyle-photos" }
+  ],
+  "vars": {
+    "BETTER_AUTH_URL": "https://smoked-style.YOUR-SUBDOMAIN.workers.dev"
+  },
+  "observability": { "enabled": true }
+}

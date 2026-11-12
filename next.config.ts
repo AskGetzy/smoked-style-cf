@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {
@@ -12,6 +10,12 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  experimental: {
+    serverActions: { bodySizeLimit: "8mb" }, // product photo uploads
+  },
 };
 
 export default nextConfig;
+
+// Gives `next dev` access to the D1 and R2 bindings from wrangler.jsonc
+initOpenNextCloudflareForDev();
