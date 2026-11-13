@@ -65,3 +65,29 @@ body {
 @utility stripe-dark {
   background: repeating-linear-gradient(135deg, #2a1d15 0 18px, #33241a 18px 36px);
 }
+
+/* Drifting smoke on the logo */
+.smoke-wisp {
+  stroke-dasharray: 38 62;
+  stroke-dashoffset: 38;
+  opacity: 0;
+  animation: smoke-rise 4.2s ease-in-out infinite;
+}
+.smoke-sway {
+  transform-origin: 50% 100%;
+  animation: smoke-sway 5s ease-in-out infinite alternate;
+}
+@keyframes smoke-rise {
+  0% { stroke-dashoffset: 38; opacity: 0; }
+  20% { opacity: 0.95; }
+  75% { opacity: 0.6; }
+  100% { stroke-dashoffset: -62; opacity: 0; }
+}
+@keyframes smoke-sway {
+  from { transform: rotate(-4deg) translateX(-2px); }
+  to { transform: rotate(4deg) translateX(2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .smoke-wisp, .smoke-sway { animation: none; }
+  .smoke-wisp { opacity: 0.8; stroke-dashoffset: 0; stroke-dasharray: none; }
+}

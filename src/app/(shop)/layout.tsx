@@ -20,13 +20,8 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       <header className="sticky top-0 z-10 border-b border-line bg-parchment/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
           <Link href="/" className="flex items-center gap-2 text-char">
-            <Logo />
-            <span className="leading-tight">
-              <span className="block font-display text-xl font-bold sm:text-2xl">{SITE.name}</span>
-              <span className="hidden text-[10px] uppercase tracking-[0.2em] text-ink-soft sm:block">
-                Smokehouse &amp; Catering
-              </span>
-            </span>
+            <Logo className="h-14 w-14" />
+            <span className="sr-only">{SITE.name}</span>
           </Link>
           <div className="flex-1" />
           <nav className="hidden items-center gap-6 text-sm sm:flex">
@@ -51,7 +46,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-4">
           <div className="space-y-2 md:col-span-1">
             <div className="flex items-center gap-2 text-char">
-              <Logo className="h-8 w-8" />
+              <Logo className="h-12 w-12" />
               <span className="font-display text-xl font-bold">{SITE.name}</span>
             </div>
             <p className="text-sm text-ink-soft">Small-batch smoked meats and catering.</p>
