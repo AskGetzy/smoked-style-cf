@@ -28,14 +28,14 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
   return (
     <div className="relative flex flex-1 flex-col">
       {/* Trust bar */}
-      <div className="flex flex-wrap justify-center gap-x-[22px] gap-y-1.5 bg-char px-6 py-2.5 text-sm tracking-wide text-parchment">
+      <div className="flex flex-wrap justify-center gap-x-[22px] gap-y-1 bg-char px-4 py-2 text-xs tracking-wide text-parchment md:px-6 md:py-2.5 md:text-sm">
         <span className="inline-flex items-center gap-2">
           <ShieldCheck stroke="#F2A93B" />
           <strong>Certified Kosher · CRC</strong>
         </span>
-        <span aria-hidden="true" className="text-gold">&bull;</span>
-        <span>Hardwood smoked in-house</span>
-        <span aria-hidden="true" className="text-gold">&bull;</span>
+        <span aria-hidden="true" className="hidden text-gold md:inline">&bull;</span>
+        <span className="hidden md:inline">Hardwood smoked in-house</span>
+        <span aria-hidden="true" className="hidden text-gold md:inline">&bull;</span>
         <span>
           Pre-order by <strong>{SITE.cutoffDay}</strong> for <strong>{SITE.pickupDay}</strong>
         </span>
@@ -43,20 +43,20 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
       {/* Nav */}
       <header className="border-b border-line bg-paper">
-        <nav className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-6 py-4">
+        <nav className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
           <Link href="/" aria-label="Smoked Style home" className="flex items-center gap-3.5 text-char">
-            <Logo />
+            <Logo className="h-[42px] w-[44px] md:h-[59px] md:w-[62px]" />
             <span className="flex flex-col gap-[3px]">
-              <Wordmark />
-              <span className="text-xs uppercase tracking-[0.18em] text-ink-soft">Smokehouse &amp; Catering</span>
+              <Wordmark size="text-[22px] md:text-[30px]" />
+              <span className="text-[10px] uppercase tracking-[0.18em] text-ink-soft md:text-xs">Smokehouse &amp; Catering</span>
             </span>
           </Link>
-          <div className="flex flex-wrap items-center gap-x-[26px] gap-y-2 text-base font-medium">
-            <Link href="/#holiday" className="py-2.5 font-bold text-ember">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-0 text-sm font-medium md:gap-x-[26px] md:text-base">
+            <Link href="/#holiday" className="py-2 font-bold text-ember md:py-2.5">
               Chanukah Specials
             </Link>
             {nav.map((n) => (
-              <Link key={n.label} href={n.href} className="py-2.5 text-ink hover:text-ember">
+              <Link key={n.label} href={n.href} className="py-2 text-ink hover:text-ember md:py-2.5">
                 {n.label}
               </Link>
             ))}
@@ -68,7 +68,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       <div className="flex-1">{children}</div>
 
       {/* Footer */}
-      <footer className="mx-auto w-full max-w-[1280px] px-6 pb-12 pt-16">
+      <footer className="mx-auto w-full max-w-[1280px] px-6 pb-24 pt-12 md:pb-12 md:pt-16">
         <div className="flex flex-wrap justify-between gap-10">
           <div className="flex flex-[1_1_280px] flex-col gap-4">
             <span className="flex items-center gap-3">
@@ -118,13 +118,13 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       <a
         href={wa}
         aria-label="Chat with us on WhatsApp"
-        className="fixed bottom-6 right-6 z-10 inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-[#1f7a4d] pl-4 pr-5 text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(0,0,0,0.25)]"
+        className="fixed bottom-5 right-5 z-10 inline-flex h-12 w-12 items-center justify-center gap-2.5 rounded-full bg-[#1f7a4d] text-[15px] font-bold text-white shadow-[0_8px_22px_rgba(0,0,0,0.25)] md:w-auto md:px-5"
       >
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 20l1.4-4A8 8 0 1 1 8 18.6z" />
           <path d="M9 9.5c.5 2 2.5 4 4.5 4.5l1-1.2 2 .8-.4 1.8c-3.5.3-7.5-3.7-7.2-7.2l1.8-.4.8 2z" />
         </svg>
-        Chat with us
+        <span className="hidden md:inline">Chat with us</span>
       </a>
     </div>
   );

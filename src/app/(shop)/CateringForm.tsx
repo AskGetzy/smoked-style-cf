@@ -10,14 +10,14 @@ export function CateringForm() {
   const [state, action, pending] = useActionState<CateringState, FormData>(requestCatering, {});
   if (state.ok) {
     return (
-      <div className="rounded-[20px] border border-[#47382c] bg-[#2a1f18] p-8 text-center text-parchment">
+      <div className="rounded-lg border border-[#47382c] bg-[#2a1f18] p-8 text-center text-parchment">
         <p className="font-display text-2xl">Thank you!</p>
         <p className="mt-2 text-parchment/70">We got your request and will be in touch soon.</p>
       </div>
     );
   }
   return (
-    <form action={action} className="flex flex-col gap-[18px] rounded-[20px] border border-[#47382c] bg-[#2a1f18] p-7">
+    <form action={action} className="flex flex-col gap-[18px] rounded-lg border border-[#47382c] bg-[#2a1f18] p-7">
       {state.error && <p className="rounded-lg bg-ember/30 px-3 py-2 text-sm text-parchment">{state.error}</p>}
       <div className="flex flex-wrap gap-4">
         <label className={l}>Name<input name="name" required placeholder="Your name" className={f} /></label>
@@ -31,7 +31,7 @@ export function CateringForm() {
         What are you planning?
         <textarea name="details" rows={3} placeholder="Type of event, anything we should know" className={`${f} py-3`} />
       </label>
-      <button type="submit" disabled={pending} className="min-h-[52px] rounded-full bg-ember text-[17px] font-bold text-white hover:bg-ember-dark disabled:opacity-60">
+      <button type="submit" disabled={pending} className="min-h-[52px] rounded-md bg-ember text-[17px] font-bold text-white hover:bg-ember-dark disabled:opacity-60">
         {pending ? "Sending…" : "Request a catering quote"}
       </button>
     </form>

@@ -10,7 +10,7 @@ export function QuickAdd({ id, max, label = "Add", tone = "ember" }: { id: numbe
     <button
       type="button"
       disabled={max < 1}
-      className={`min-h-11 rounded-full px-5 text-[15px] font-bold disabled:opacity-50 ${cls}`}
+      className={`min-h-11 rounded-md px-5 text-[15px] font-bold disabled:opacity-50 ${cls}`}
       onClick={() => {
         addToCart(id, 1, max);
         setDone(true);
