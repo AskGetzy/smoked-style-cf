@@ -30,7 +30,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       <header className="relative border-b border-line bg-paper">
         <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-3.5">
           <Link href="/" aria-label="Smoked Style home" className="flex items-center gap-3.5 text-ink">
-            <Logo className="h-[50px] w-[38px] min-[820px]:h-[58px] min-[820px]:w-[44px]" />
+            <Logo className="h-[54px] w-[54px] min-[820px]:h-[68px] min-[820px]:w-[68px]" />
             <span className="flex flex-col gap-1.5">
               <Wordmark size="text-[17px] min-[820px]:text-[26px]" />
               <span className="text-[10px] uppercase tracking-[0.24em] text-ink-soft">Smokehouse &middot; Catering</span>
@@ -55,7 +55,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
         <div className="flex flex-wrap justify-between gap-10">
           <div className="flex flex-[1_1_280px] flex-col gap-4">
             <span className="flex items-center gap-3">
-              <Logo className="h-[58px] w-[44px]" />
+              <Logo className="h-[84px] w-[84px]" />
               <Wordmark size="text-[26px]" />
             </span>
             <span className="leading-relaxed text-ink-soft">Small-batch smoked meats and catering.</span>
