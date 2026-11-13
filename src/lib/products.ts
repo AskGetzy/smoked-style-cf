@@ -81,3 +81,40 @@ export function stockState(p: Pick<Product, "stock_remaining" | "low_stock_at">)
 export function photoUrl(key: string): string {
   return `/img/${key}`;
 }
+
+// ───────────── Public storefront queries (active items only) ─────────────
+export type ShopProduct = Product & { category_name: string | null; category_slug: string | null };
+
+type ShopRow = ProductRow & { category_name: string | null; category_slug: string | null };
+
+const SHOP_SELECT = `SELECT p.*, c.name AS category_name, c.slug AS category_slug
+                       FROM products p LEFT JOIN categories c ON c.id = p.category_id`;
+
+export async function listShopProducts(categorySlug?: string): Promise<ShopProduct[]> {
+  const stmt = categorySlug
+    ? db().prepare(`${SHOP_SELECT} WHERE p.active = 1 AND c.slug = ? ORDER BY p.sort_order, p.name`).bind(categorySlug)
+    : db().prepare(`${SHOP_SELECT} WHERE p.active = 1 ORDER BY c.sort_order, p.sort_order, p.name`);
+  const { results } = await stmt.all<ShopRow>();
+  return results.map((r) => ({ ...fromRow(r), category_name: r.category_name, category_slug: r.category_slug }));
+}
+
+export async function getShopProduct(slug: string): Promise<ShopProduct | null> {
+  const r = await db().prepare(`${SHOP_SELECT} WHERE p.active = 1 AND p.slug = ?`).bind(slug).first<ShopRow>();
+  return r ? { ...fromRow(r), category_name: r.category_name, category_slug: r.category_slug } : null;
+}
+
+export async function getShopProductsByIds(ids: number[]): Promise<ShopProduct[]> {
+  if (ids.length === 0) return [];
+  const marks = ids.map(() => "?").join(",");
+  const { results } = await db()
+    .prepare(`${SHOP_SELECT} WHERE p.active = 1 AND p.id IN (${marks})`)
+    .bind(...ids)
+    .all<ShopRow>();
+  return results.map((r) => ({ ...fromRow(r), category_name: r.category_name, category_slug: r.category_slug }));
+}
+
+/** Most a customer can add right now: the per-order cap and the stock left, whichever is lower. */
+export function maxOrderable(p: Pick<Product, "max_per_order" | "stock_remaining">): number {
+  const caps = [p.max_per_order, p.stock_remaining].filter((n): n is number => n !== null);
+  return caps.length ? Math.max(0, Math.min(...caps)) : 99;
+}
