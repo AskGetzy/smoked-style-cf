@@ -13,87 +13,77 @@ const CATEGORY_NOTE: Record<string, string> = {
   "non-smoked": "Fresh cuts",
 };
 
-const eyebrow = "text-[13px] font-bold uppercase tracking-[0.2em]";
-const h2 = "font-display font-bold tracking-tight text-[30px] leading-[1.15] md:text-[44px]";
-const photoPh = "stripe-dark flex items-end p-4 text-xs uppercase tracking-[0.12em] text-[#c9b79e]";
+const eyebrow = "text-[11px] font-medium uppercase tracking-[0.3em]";
+const h2 = "font-display text-[36px] font-medium leading-[1.1] md:text-[54px]";
+const btn = "inline-flex min-h-[52px] items-center justify-center rounded-[2px] px-8 text-[12px] font-medium uppercase tracking-[0.16em] md:text-[13px]";
+const photoPh = "stripe-dark flex items-end p-4 text-[11px] uppercase tracking-[0.14em] text-[#B3A796]";
+const romans = ["i.", "ii.", "iii."];
 
 export default async function Home() {
   const [categories, products, holiday] = await Promise.all([listCategories(), listShopProducts(), listHolidayProducts()]);
   const best = [...products].sort((a, b) => b.order_count - a.order_count || a.sort_order - b.sort_order).slice(0, 4);
-  const holidayHeading = SITE.holidayName[0].toUpperCase() + SITE.holidayName.slice(1);
 
   return (
     <div>
       {/* Hero */}
-      <section id="top" className="bg-char text-parchment">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-10 md:gap-14 px-6 pb-16 pt-12 md:pb-24 md:pt-20">
+      <section id="top" className="bg-char text-[#EDE6DA]">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-6 pb-16 pt-14 md:gap-16 md:pb-28 md:pt-24">
           <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-7">
-            <h1 className="font-display text-[clamp(38px,5.5vw,76px)] font-bold leading-none tracking-[-0.02em]">
+            <p className={`${eyebrow} flex items-center gap-4 text-brass`}>
+              <span aria-hidden="true" className="h-px w-10 bg-brass" />
+              Under CRC supervision
+            </p>
+            <h1 className="font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.98] tracking-[-0.01em]">
               Low and slow.
               <br />
-              <em className="font-medium text-fire">Worth the wait.</em>
+              <em className="font-medium text-brass">Worth the wait.</em>
             </h1>
-            <p className="max-w-[520px] text-[19px] leading-relaxed text-[#d8c8b0]">
-              Real hardwood smoke, real bark, made in small batches. Jerky, smoked steaks and boards you can&apos;t get from a
-              deli case. Pre-order online and pick up fresh.
+            <p className="max-w-[500px] text-[17px] leading-[1.7] text-[#B3A796]">
+              Real hardwood smoke and real bark, made in small batches. Jerky, smoked steaks and boards, pre-ordered online and
+              picked up fresh.
             </p>
             <div className="flex flex-wrap gap-3.5">
-              <Link href="/shop" className="inline-flex min-h-[52px] items-center gap-2.5 rounded-md bg-ember px-7 text-[17px] font-bold text-white hover:bg-ember-dark">
-                Shop the smokehouse
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14" />
-                  <path d="m13 6 6 6-6 6" />
-                </svg>
-              </Link>
-              <Link href="/#holiday" className="inline-flex min-h-[52px] items-center rounded-md border-2 border-gold px-7 text-[17px] font-bold text-gold">
-                {holidayHeading}
-              </Link>
+              <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Shop the smokehouse</Link>
+              <Link href="/#catering" className={`${btn} border border-[#EDE6DA]/50 text-[#EDE6DA] hover:border-brass hover:text-brass`}>Catering</Link>
             </div>
           </div>
-          <div className="relative min-w-0 flex-[1_1_480px]">
-            <div role="img" aria-label="Photo placeholder: sliced smoked brisket on dark slate" className={`${photoPh} aspect-[5/4] rounded-lg p-6 text-[13px] tracking-[0.14em]`}>
+          <div className="min-w-0 flex-[1_1_480px]">
+            <div role="img" aria-label="Photo placeholder: sliced smoked brisket on dark slate" className={`${photoPh} aspect-[5/4] rounded-[2px]`}>
               [Hero photo — overhead on dark slate, smoke ring visible]
             </div>
-            <div className="absolute -bottom-7 -left-5 hidden md:flex items-center gap-3.5 rounded-lg bg-paper px-5 py-4 text-ink shadow-[0_14px_34px_rgba(0,0,0,0.35)]">
-              <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C9431C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 0-7.5z" />
-                <path d="M6 21h12" />
-              </svg>
-              <div>
-                <div className="font-display text-xl font-bold">{SITE.smokeHours} on the smoke</div>
-                <div className="text-sm text-ink-soft">{SITE.woodType} · smoked in-house</div>
-              </div>
-            </div>
+            <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-[#B3A796]">
+              {SITE.smokeHours} on the smoke &middot; {SITE.woodType}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Holiday specials */}
-      <section id="holiday" className="border-y border-gold/30 bg-[#241711] text-parchment">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-12 md:py-[72px]">
+      {/* Holiday */}
+      <section id="holiday" className="bg-[#1F1915] text-[#EDE6DA]">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 py-16 md:py-24">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="flex flex-col gap-2.5">
-              <p className={`${eyebrow} text-gold`}>Limited run · order by {SITE.holidayOrderBy}</p>
-              <h2 className="font-display text-[32px] font-bold leading-tight tracking-tight md:text-[46px]">{holidayHeading}</h2>
+            <div className="flex flex-col gap-3">
+              <p className={`${eyebrow} text-brass`}>Limited run &middot; order by {SITE.holidayOrderBy}</p>
+              <h2 className={h2}>{SITE.holidayHeading}</h2>
             </div>
-            <Link href="/shop" className="py-2.5 text-base font-bold text-gold">See all holiday boards &rarr;</Link>
+            <Link href="/shop" className="py-3 text-xs font-medium uppercase tracking-[0.16em] text-brass">View the collection &rarr;</Link>
           </div>
-          <div className="flex flex-wrap gap-5">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {holiday.length > 0
               ? holiday.map((p) => (
-                  <article key={p.id} className="flex min-w-0 flex-[1_1_280px] flex-col overflow-hidden rounded-lg bg-char">
+                  <article key={p.id} className="flex min-w-0 flex-col gap-4">
                     <Link href={`/p/${p.slug}`} className="block">
-                      <div className="stripe-dark aspect-[4/3]">
+                      <div className="stripe-dark aspect-[4/3] overflow-hidden rounded-[2px]">
                         {p.photo_keys[0] && <img src={photoUrl(p.photo_keys[0])} alt={p.name} className="h-full w-full object-cover" />}
                       </div>
                     </Link>
-                    <div className="flex items-center justify-between gap-3 p-5">
+                    <div className="flex items-center justify-between gap-3">
                       <div className="flex flex-col gap-1">
-                        <Link href={`/p/${p.slug}`} className="font-display text-xl font-bold text-parchment">{p.name}</Link>
-                        <span className="text-base font-bold text-gold">{formatCents(p.price_cents)}</span>
+                        <Link href={`/p/${p.slug}`} className="font-display text-2xl font-medium">{p.name}</Link>
+                        <span className="text-sm text-brass">{formatCents(p.price_cents)}</span>
                       </div>
                       {stockState(p).kind === "sold_out" ? (
-                        <span className="text-sm font-bold text-gold">Sold out</span>
+                        <span className="text-xs uppercase tracking-[0.16em] text-brass">Sold out</span>
                       ) : (
                         <QuickAdd id={p.id} max={maxOrderable(p)} label="Pre-order" tone="gold" />
                       )}
@@ -101,14 +91,11 @@ export default async function Home() {
                   </article>
                 ))
               : ["[Photo — themed Chanukah board]", "[Photo — jerky gift box]", "[Photo — party platter]"].map((ph) => (
-                  <article key={ph} className="flex min-w-0 flex-[1_1_280px] flex-col overflow-hidden rounded-lg bg-char">
-                    <div role="img" aria-label="Photo placeholder" className={`${photoPh} aspect-[4/3]`}>{ph}</div>
-                    <div className="flex items-center justify-between gap-3 p-5">
-                      <div className="flex flex-col gap-1">
-                        <span className="font-display text-xl font-bold text-parchment">[Holiday board name]</span>
-                        <span className="text-base font-bold text-gold">[PRICE]</span>
-                      </div>
-                      <span className="inline-flex min-h-11 items-center rounded-md bg-gold px-[18px] text-[15px] font-bold text-char">Pre-order</span>
+                  <article key={ph} className="flex min-w-0 flex-col gap-4">
+                    <div role="img" aria-label="Photo placeholder" className={`${photoPh} aspect-[4/3] rounded-[2px]`}>{ph}</div>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-display text-2xl font-medium">[Holiday board name]</span>
+                      <span className="text-sm text-brass">[PRICE]</span>
                     </div>
                   </article>
                 ))}
@@ -117,19 +104,19 @@ export default async function Home() {
       </section>
 
       {/* Categories */}
-      <section id="shop" className="border-b border-line bg-paper">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-9 px-6 py-12 md:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+      <section id="shop" className="border-b border-line bg-parchment">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 py-16 md:py-24">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <p className={`${eyebrow} text-ember`}>The smokehouse</p>
             <h2 className={h2}>Shop by the cut</h2>
-            <Link href="/shop" className="py-2.5 text-base font-bold text-ember underline">View everything &rarr;</Link>
           </div>
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap gap-6">
             {categories.map((c) => (
-              <Link key={c.id} href={`/shop/${c.slug}`} className="flex min-w-0 flex-[1_1_200px] flex-col gap-3.5 text-ink">
-                <div role="img" aria-label={`Photo placeholder: ${c.name}`} className={`${photoPh} aspect-[4/5] rounded-lg`}>[Photo]</div>
-                <div className="flex items-baseline justify-between gap-2">
-                  <span className="font-display text-[26px] font-bold">{c.name}</span>
-                  <span className="text-sm text-ink-soft">{CATEGORY_NOTE[c.slug] ?? ""}</span>
+              <Link key={c.id} href={`/shop/${c.slug}`} className="group flex min-w-0 flex-[1_1_200px] flex-col gap-4 text-center text-ink">
+                <div role="img" aria-label={`Photo placeholder: ${c.name}`} className={`${photoPh} aspect-[3/4] rounded-[2px]`}>[Photo]</div>
+                <div className="flex flex-col gap-1">
+                  <span className="font-display text-[26px] font-medium group-hover:text-ember">{c.name}</span>
+                  <span className="text-[11px] uppercase tracking-[0.22em] text-ink-soft">{CATEGORY_NOTE[c.slug] ?? ""}</span>
                 </div>
               </Link>
             ))}
@@ -139,37 +126,36 @@ export default async function Home() {
 
       {/* Best sellers */}
       {best.length > 0 && (
-        <section className="mx-auto flex max-w-[1280px] flex-col gap-9 px-6 pb-10 pt-12 md:pt-[88px]">
-          <div className="flex flex-col gap-2.5">
-            <p className={`${eyebrow} text-ember`}>Most ordered</p>
-            <h2 className={h2}>Best sellers</h2>
+        <section className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 pb-8 pt-16 md:pt-24">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex flex-col gap-3">
+              <p className={`${eyebrow} text-ember`}>Most ordered</p>
+              <h2 className={h2}>Best sellers</h2>
+            </div>
+            <Link href="/shop" className="py-3 text-xs font-medium uppercase tracking-[0.16em] text-ink hover:text-ember">Shop all &rarr;</Link>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {best.map((p) => {
               const soldOut = stockState(p).kind === "sold_out";
               return (
-                <article key={p.id} className="flex min-w-0 flex-[1_1_260px] flex-col overflow-hidden rounded-lg border border-line bg-paper">
-                  <Link href={`/p/${p.slug}`} className="relative block">
-                    <div className="stripe-dark aspect-[4/3]">
+                <article key={p.id} className="flex min-w-0 flex-col gap-4">
+                  <Link href={`/p/${p.slug}`} className="block">
+                    <div className="stripe-dark aspect-square overflow-hidden rounded-[2px]">
                       {p.photo_keys[0] && (
                         <img src={photoUrl(p.photo_keys[0])} alt={p.name} className={`h-full w-full object-cover ${soldOut ? "opacity-60" : ""}`} />
                       )}
                     </div>
-                    {p.category_name && (
-                      <span className="absolute left-3.5 top-3.5 rounded-md bg-gold px-2.5 py-1.5 text-xs font-bold uppercase tracking-widest text-char">
-                        {p.category_name}
-                      </span>
-                    )}
                   </Link>
-                  <div className="flex flex-1 flex-col gap-2.5 p-5">
-                    <h3 className="font-display text-xl font-bold">
+                  <div className="flex flex-1 flex-col gap-2">
+                    {p.category_name && <span className="text-[10px] uppercase tracking-[0.24em] text-ink-soft">{p.category_name}</span>}
+                    <h3 className="font-display text-2xl font-medium leading-tight">
                       <Link href={`/p/${p.slug}`}>{p.name}</Link>
                     </h3>
-                    <span className="text-sm text-ink-soft">[★ rating · # reviews]</span>
-                    {p.description && <p className="line-clamp-2 text-[15px] leading-normal text-ink-soft">{p.description}</p>}
+                    {p.description && <p className="line-clamp-2 text-sm leading-relaxed text-ink-soft">{p.description}</p>}
+                    <span className="text-xs text-ink-soft">[★ rating · # reviews]</span>
                     <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-                      <span className="text-xl font-bold">{formatCents(p.price_cents)}</span>
-                      {soldOut ? <span className="text-sm font-bold text-ember">Sold out</span> : <QuickAdd id={p.id} max={maxOrderable(p)} />}
+                      <span className="text-base font-medium">{formatCents(p.price_cents)}</span>
+                      {soldOut ? <span className="text-xs uppercase tracking-[0.16em] text-ember">Sold out</span> : <QuickAdd id={p.id} max={maxOrderable(p)} />}
                     </div>
                   </div>
                 </article>
@@ -180,39 +166,32 @@ export default async function Home() {
       )}
 
       {/* Add-ons */}
-      <section className="mx-auto max-w-[1280px] px-6 pb-12 md:pb-[88px]">
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-6 rounded-lg border border-line bg-paper p-8">
-          <div className="flex flex-[1_1_300px] flex-col gap-2">
-            <h2 className="font-display text-[26px] font-bold md:text-[30px]">Make it a spread</h2>
-            <p className="text-base leading-normal text-ink-soft">Add extras to any order at checkout.</p>
-          </div>
-          <div className="flex flex-[2_1_520px] flex-wrap gap-3">
-            {["[Sauce trio]", "[Pickles]", "[Wine]", "[Challah]"].map((a) => (
-              <span key={a} className="inline-flex min-h-12 items-center gap-2.5 rounded-md border-[1.5px] border-char px-5 text-[15px] font-bold">
-                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-                {a}
-              </span>
-            ))}
-          </div>
+      <section className="mx-auto max-w-[1280px] px-6 pb-16 md:pb-24">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-line py-6">
+          <span className="font-display text-2xl italic">Make it a spread &mdash;</span>
+          {["[Sauces]", "[Pickles]", "[Wine]", "[Challah]"].map((a) => (
+            <span key={a} className="py-2 text-xs font-medium uppercase tracking-[0.16em] text-ink">+ {a}</span>
+          ))}
         </div>
       </section>
 
-      {/* How pre-ordering works */}
+      {/* Steps */}
       <section className="border-y border-line bg-paper">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 py-12 md:py-20">
-          <h2 className={h2}>How pre-ordering works</h2>
-          <ol className="flex flex-wrap gap-8">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 py-16 md:py-24">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <p className={`${eyebrow} text-ember`}>How it works</p>
+            <h2 className={h2}>Pre-order, then pick up</h2>
+          </div>
+          <ol className="flex flex-wrap gap-10">
             {[
-              ["01", "Pick your cuts", "Order before the cutoff. Some items are limited each batch, so popular ones can sell out."],
-              ["02", "Check out as a guest", "No account needed. You pay at checkout and get an email link to track your order."],
-              ["03", "Pick up fresh", `Collect on ${SITE.pickupDay} at ${SITE.pickupLocation}. We'll email you when it's ready.`],
-            ].map(([n, t, d]) => (
-              <li key={n} className="flex min-w-0 flex-[1_1_260px] flex-col gap-3 border-t-[3px] border-ember pt-5">
-                <span className="font-display text-[32px] italic text-ember">{n}</span>
-                <h3 className="text-[21px] font-bold">{t}</h3>
-                <p className="text-base leading-relaxed text-ink-soft">{d}</p>
+              ["Choose your cuts", "Order before the cutoff. Some items are limited each batch, so popular ones can sell out."],
+              ["Check out as a guest", "No account needed. You pay at checkout and get an email link to track your order."],
+              ["Pick up fresh", `Collect on ${SITE.pickupDay} at ${SITE.pickupLocation}. We'll email you when it's ready.`],
+            ].map(([t, d], i) => (
+              <li key={t} className="flex min-w-0 flex-[1_1_260px] flex-col gap-3 border-t border-line pt-6">
+                <span className="font-display text-4xl italic text-brass">{romans[i]}</span>
+                <h3 className="font-display text-[26px] font-medium">{t}</h3>
+                <p className="text-[15px] leading-[1.7] text-ink-soft">{d}</p>
               </li>
             ))}
           </ol>
@@ -220,57 +199,44 @@ export default async function Home() {
       </section>
 
       {/* Gifts */}
-      <section id="gifts" className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-10 md:gap-14 px-6 py-12 md:py-[88px]">
-        <div role="img" aria-label="Photo placeholder: gift box with printed message card" className="stripe-dark flex aspect-[4/3] min-w-0 flex-[1_1_440px] items-center justify-center rounded-lg">
-          <div className="flex w-[62%] flex-col gap-3.5 rounded-md border-t-[5px] border-fire bg-paper p-7 shadow-[0_14px_34px_rgba(0,0,0,0.35)]">
-            <span className="text-xs uppercase tracking-[0.18em] text-ink-soft">A gift for you</span>
+      <section id="gifts" className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-6 py-16 md:gap-16 md:py-24">
+        <div role="img" aria-label="Photo placeholder: gift box with printed message card" className="stripe-dark flex aspect-[4/3] min-w-0 flex-[1_1_440px] items-center justify-center rounded-[2px]">
+          <div className="flex w-[58%] flex-col gap-3 border border-brass bg-char p-7 text-[#EDE6DA]">
+            <span className="text-[10px] uppercase tracking-[0.26em] text-brass">A gift for you</span>
             <span className="font-display text-2xl italic leading-snug">&ldquo;Your message, printed on a card and packed with the order.&rdquo;</span>
-            <span className="text-sm text-ink-soft">&mdash; from the sender</span>
+            <span className="text-xs text-[#B3A796]">&mdash; from the sender</span>
           </div>
         </div>
-        <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-[22px]">
+        <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-6">
           <p className={`${eyebrow} text-ember`}>Gifting</p>
-          <h2 className={h2}>Send something they&apos;ll actually eat.</h2>
-          <p className="text-lg leading-relaxed text-ink-soft">
+          <h2 className={h2}>A gift they&apos;ll actually eat.</h2>
+          <p className="text-[17px] leading-[1.7] text-ink-soft">
             Boards and jerky packs make easy gifts. Write a note at checkout and we print it on a card that goes in the box.
           </p>
-          <ul className="flex flex-col gap-3 text-[17px]">
+          <ul className="flex flex-col text-[15px]">
             {["Printed gift message card", "Bulk, Purim and holiday orders welcome", "Certified kosher by CRC"].map((t) => (
-              <li key={t} className="flex items-center gap-3">
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9431C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m5 12 5 5 9-10" />
-                </svg>
-                {t}
-              </li>
+              <li key={t} className="border-t border-line py-3 last:border-b">{t}</li>
             ))}
           </ul>
           <div>
-            <Link href="/shop/boards" className="inline-flex min-h-[52px] items-center rounded-md bg-char px-7 text-[17px] font-bold text-parchment">
-              Shop gift boards
-            </Link>
+            <Link href="/shop/boards" className={`${btn} bg-char text-[#EDE6DA] hover:bg-ember`}>Shop gift boards</Link>
           </div>
         </div>
       </section>
 
       {/* Reviews */}
       <section className="border-t border-line bg-paper">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-9 px-6 py-12 md:py-20 text-center">
+        <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-10 px-6 py-16 text-center md:py-24">
           <div className="flex flex-col items-center gap-3">
-            <div aria-hidden="true" className="flex gap-1 text-fire">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <svg key={i} width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" />
-                </svg>
-              ))}
-            </div>
-            <h2 className="font-display text-[30px] font-bold md:text-[40px]">What customers are saying</h2>
-            <span className="text-[15px] text-ink-soft">{SITE.reviewCount}</span>
+            <p className={`${eyebrow} text-ember`}>Reviews</p>
+            <h2 className={h2}>From our customers</h2>
+            <span className="text-sm text-ink-soft">[★★★★★ · # reviews]</span>
           </div>
-          <div className="flex w-full flex-wrap gap-5 text-left">
+          <div className="flex w-full flex-wrap gap-6 text-left">
             {[1, 2, 3].map((i) => (
-              <figure key={i} className="m-0 flex min-w-0 flex-[1_1_280px] flex-col gap-3.5 rounded-lg border border-dashed border-[#b5a48f] bg-parchment p-6">
-                <blockquote className="m-0 font-display text-xl italic leading-snug">[Customer review]</blockquote>
-                <figcaption className="text-sm font-bold text-ink-soft">[Customer name] · [Product]</figcaption>
+              <figure key={i} className="m-0 flex min-w-0 flex-[1_1_280px] flex-col gap-4 border border-dashed border-[#c9bda9] bg-parchment p-7">
+                <blockquote className="m-0 font-display text-2xl italic leading-snug">[Customer review]</blockquote>
+                <figcaption className="text-[11px] uppercase tracking-[0.2em] text-ink-soft">[Customer name] · [Product]</figcaption>
               </figure>
             ))}
           </div>
@@ -278,12 +244,16 @@ export default async function Home() {
       </section>
 
       {/* Catering */}
-      <section id="catering" className="bg-char text-parchment">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-10 md:gap-14 px-6 py-14 md:py-24">
-          <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-[22px]">
-            <p className={`${eyebrow} text-gold`}>Catering</p>
-            <h2 className="font-display text-[34px] font-bold leading-[1.1] md:text-[52px] tracking-tight">Bring the smokehouse to your event.</h2>
-            <p className="max-w-[520px] text-lg leading-relaxed text-[#d8c8b0]">
+      <section id="catering" className="bg-char text-[#EDE6DA]">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-12 px-6 py-16 md:gap-16 md:py-28">
+          <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-6">
+            <p className={`${eyebrow} text-brass`}>Catering</p>
+            <h2 className="font-display text-[40px] font-medium leading-[1.05] md:text-[64px]">
+              The smokehouse,
+              <br />
+              <em className="text-brass">at your table.</em>
+            </h2>
+            <p className="max-w-[500px] text-[17px] leading-[1.7] text-[#B3A796]">
               Small catering for gatherings, simchas and office lunches, all under CRC supervision. Tell us the date and
               headcount and we&apos;ll put a menu together.
             </p>

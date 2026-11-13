@@ -10,7 +10,8 @@ export const SITE = {
   email: "[EMAIL]",
   smokeHours: "[HOURS]",
   woodType: "[Wood type]",
-  holidayName: "Chanukah specials",
+  holidayName: "Chanukah",
+  holidayHeading: "The Chanukah Collection",
   holidayOrderBy: "[DATE]",
   // Digits only, with country code, e.g. "13475550100". Empty = the button jumps to the catering form.
   whatsappNumber: "",
