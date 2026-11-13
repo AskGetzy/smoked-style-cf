@@ -57,3 +57,11 @@ body {
 @utility badge {
     @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
 }
+
+/* Diagonal-stripe placeholder used until real photos exist */
+@utility stripe-light {
+  background: repeating-linear-gradient(135deg, #e6d6b8 0 14px, #eadcc3 14px 28px);
+}
+@utility stripe-dark {
+  background: repeating-linear-gradient(135deg, #2a1d15 0 18px, #33241a 18px 36px);
+}
