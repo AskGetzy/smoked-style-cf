@@ -23,6 +23,7 @@ export async function POST(req: Request) {
       unit_label: p.unit_label,
       photo: p.photo_keys[0] ?? null,
       needs_approval: p.needs_approval,
+      taxable: p.taxable,
       max: maxOrderable(p),
       sold_out: stockState(p).kind === "sold_out",
     })),

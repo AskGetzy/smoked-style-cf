@@ -122,15 +122,15 @@ export function CartView() {
           <span>Subtotal</span>
           <span className="font-medium">{formatCents(subtotal)}</span>
         </div>
-        <p className="text-sm text-ink-soft">Tax and delivery are added at checkout.</p>
+        <p className="text-sm text-ink-soft">Sales tax is added at checkout.</p>
         {hasApproval && (
           <p className="text-sm text-warn">
             Your order includes a by-request item. We confirm it before your card is charged.
           </p>
         )}
-        <button disabled className="btn-primary w-full">
-          Checkout opens soon
-        </button>
+        <Link href="/checkout" className="btn-primary w-full text-center">
+          Checkout
+        </Link>
       </div>
     </div>
   );
