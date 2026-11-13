@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "smoked-style",
+  "name": "smoked-style-cf",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
@@ -10,7 +10,7 @@
   },
   "services": [
     // Must match "name" above
-    { "binding": "WORKER_SELF_REFERENCE", "service": "smoked-style" }
+    { "binding": "WORKER_SELF_REFERENCE", "service": "smoked-style-cf" }
   ],
   "d1_databases": [
     {
@@ -24,8 +24,5 @@
     // Product photos
     { "binding": "PHOTOS", "bucket_name": "smokedstyle-photos" }
   ],
-  "vars": {
-    "BETTER_AUTH_URL": "https://smoked-style.YOUR-SUBDOMAIN.workers.dev"
-  },
   "observability": { "enabled": true }
 }

@@ -11,7 +11,9 @@ function createAuth() {
   return betterAuth({
     database: DB,
     secret: e.BETTER_AUTH_SECRET,
-    baseURL: e.BETTER_AUTH_URL,
+    // Left unset in production: Better Auth reads the site address from each request.
+    // Set BETTER_AUTH_URL only to pin it (local dev does).
+    baseURL: (e as { BETTER_AUTH_URL?: string }).BETTER_AUTH_URL || undefined,
     emailAndPassword: { enabled: true, minPasswordLength: 8 },
     session: {
       expiresIn: 60 * 60 * 24 * 30, // 30 days: stay logged in on the kitchen tablet
