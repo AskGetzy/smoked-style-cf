@@ -22,7 +22,7 @@ export function ProductCard({ p }: { p: ShopProduct }) {
             className={`h-full w-full object-cover transition group-hover:scale-105 ${soldOut ? "opacity-60" : ""}`}
           />
         ) : (
-          <div className="flex h-full items-center justify-center font-display text-4xl text-ink-soft/40">SS</div>
+          <div className="flex h-full items-center justify-center bg-parchment-dark text-ink-soft/40"><svg aria-hidden="true" width="40%" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 25 H37 A5 6 0 0 1 37 37 H14" /><ellipse cx="14" cy="31" rx="5" ry="6" /><path d="M8 43 H42" /></svg></div>
         )}
       </div>
       <div className="space-y-1 p-3">

@@ -78,12 +78,3 @@ svg { overflow: visible; }
   100% { transform: translate(-1px, -10px); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .ss-smoke { animation: none; opacity: 0.8; } }
-
-/* Smoke wisps over the seal logo */
-.ss-wisp { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: ssWisp 4.2s ease-out infinite; }
-@keyframes ssWisp {
-  0% { transform: translateY(26px) scaleY(0.7); opacity: 0; }
-  25% { opacity: 0.9; }
-  100% { transform: translateY(-14px) scaleY(1.05); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) { .ss-wisp { animation: none; opacity: 0.8; } }

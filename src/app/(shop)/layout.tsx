@@ -2,7 +2,7 @@ import Link from "next/link";
 import { listCategories } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { CartLink } from "./CartLink";
-import { Logo } from "./Logo";
+import { Logo, Seal, Wordmark } from "./Logo";
 import { MobileNav } from "./MobileNav";
 
 export const dynamic = "force-dynamic";
@@ -28,9 +28,13 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
       {/* Nav */}
       <header className="relative border-b border-line bg-paper">
-        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-3.5">
-          <Link href="/" aria-label="Smoked Style home" className="-my-2 flex items-center">
-            <Logo className="h-[116px] w-[116px] min-[820px]:h-[160px] min-[820px]:w-[160px]" />
+        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-[13px] min-[820px]:py-[18px]">
+          <Link href="/" aria-label="Smoked Style home" className="flex items-center gap-3.5 text-ink">
+            <Logo />
+            <span className="flex flex-col gap-1">
+              <Wordmark size="text-[19px] min-[820px]:text-[26px]" />
+              <span className="text-[8px] font-medium uppercase tracking-[0.28em] text-ink-soft min-[820px]:text-[10px] min-[820px]:tracking-[0.32em]">Smokehouse &middot; Catering</span>
+            </span>
           </Link>
           <div className="hidden items-center gap-x-8 text-[13px] font-medium uppercase tracking-[0.14em] min-[820px]:flex">
             {nav.map((n) => (
@@ -51,7 +55,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
         <div className="flex flex-wrap justify-between gap-10">
           <div className="flex flex-[1_1_280px] flex-col gap-4">
             <span className="flex items-center gap-3">
-              <Logo className="h-[140px] w-[140px]" />
+              <Seal />
             </span>
             <span className="leading-relaxed text-ink-soft">Small-batch smoked meats and catering.</span>
             <div className="flex items-center gap-3.5">
