@@ -8,6 +8,9 @@ WorkingDirectory=/home/pi/smoked-style-cf/pi
 Environment=SS_URL=https://smoked-style-cf.getzyw89.workers.dev
 Environment=SS_TOKEN=PASTE_THE_SAME_SECRET_AS_PRINT_TOKEN
 Environment=SS_PRINTER=Zebra_ZD621
+Environment=SS_CARD_PRINTER=NAME_OF_THE_COLOR_PRINTER
+Environment=SS_CARD_W_IN=5
+Environment=SS_CARD_H_IN=7
 Environment=SS_DPI=203
 ExecStart=/usr/bin/python3 /home/pi/smoked-style-cf/pi/print_agent.py
 Restart=always
