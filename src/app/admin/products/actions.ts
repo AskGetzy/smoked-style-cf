@@ -37,6 +37,7 @@ type ParsedProduct = {
   stock_remaining: number | null;
   low_stock_at: number;
   taxable: number;
+  holiday: number;
 };
 
 /** Blank → null; otherwise a whole number ≥ min, or an error message. */
@@ -77,6 +78,7 @@ function parse(f: FormData): ParsedProduct | string {
     stock_remaining: stock,
     low_stock_at: low ?? 5,
     taxable: f.get("taxable") === "on" ? 1 : 0,
+    holiday: f.get("holiday") === "on" ? 1 : 0,
   };
 }
 
@@ -118,12 +120,12 @@ export async function createProduct(_prev: FormState, f: FormData): Promise<Form
     .prepare(
       `INSERT INTO products
         (name, slug, category_id, description, price_cents, unit_label, sort_order,
-         active, needs_approval, max_per_order, stock_remaining, low_stock_at, taxable)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+         active, needs_approval, max_per_order, stock_remaining, low_stock_at, taxable, holiday)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
     )
     .bind(
       p.name, slug, p.category_id, p.description, p.price_cents, p.unit_label, p.sort_order,
-      p.active, p.needs_approval, p.max_per_order, p.stock_remaining, p.low_stock_at, p.taxable,
+      p.active, p.needs_approval, p.max_per_order, p.stock_remaining, p.low_stock_at, p.taxable, p.holiday,
     )
     .first<{ id: number }>();
   if (!row) return failed("Couldn't save. Try again.", f);
@@ -161,14 +163,14 @@ export async function updateProduct(id: number, _prev: FormState, f: FormData): 
       `UPDATE products SET
          name = ?, slug = ?, category_id = ?, description = ?, price_cents = ?, unit_label = ?,
          sort_order = ?, photo_keys = ?, active = ?, needs_approval = ?, max_per_order = ?,
-         stock_remaining = ?, low_stock_at = ?, taxable = ?,
+         stock_remaining = ?, low_stock_at = ?, taxable = ?, holiday = ?,
          updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
        WHERE id = ?`,
     )
     .bind(
       p.name, slug, p.category_id, p.description, p.price_cents, p.unit_label, p.sort_order,
       JSON.stringify([...kept, ...added]), p.active, p.needs_approval, p.max_per_order,
-      p.stock_remaining, p.low_stock_at, p.taxable, id,
+      p.stock_remaining, p.low_stock_at, p.taxable, p.holiday, id,
     )
     .run();
 

@@ -157,6 +157,12 @@ export function ProductForm({ categories, product, action, notice }: Props) {
           hint="Adds sales tax for this item at checkout."
           defaultChecked={check("taxable", product?.taxable ?? true)}
         />
+        <Toggle
+          name="holiday"
+          label="Holiday special"
+          hint="Shows this item in the Chanukah specials section on the home page."
+          defaultChecked={check("holiday", product?.holiday ?? false)}
+        />
 
         <div className="space-y-2">
           <label className="flex items-center gap-3">

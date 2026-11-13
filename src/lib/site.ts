@@ -1,10 +1,18 @@
-// Business details shown on the storefront. Leave a value empty ("") and it is simply not shown.
+// Business details shown on the storefront. Anything in [BRACKETS] is a placeholder
+// until real content is supplied: edit the text here and it updates everywhere.
 export const SITE = {
   name: "Smoked Style",
-  banner: "Pre-orders open. Order ahead and pick up fresh.",
-  pickupLocation: "",
-  pickupHours: "",
-  phone: "",
-  email: "",
-  smokeNote: "", // e.g. "Hardwood smoked in-house"
+  cutoffDay: "[CUTOFF DAY]",
+  pickupDay: "[PICKUP DAY]",
+  pickupLocation: "[PICKUP LOCATION]",
+  pickupHours: "[PICKUP DAYS & HOURS]",
+  phone: "[PHONE]",
+  email: "[EMAIL]",
+  smokeHours: "[HOURS]",
+  woodType: "[Wood type]",
+  holidayName: "Chanukah specials",
+  holidayOrderBy: "[DATE]",
+  // Digits only, with country code, e.g. "13475550100". Empty = the button jumps to the catering form.
+  whatsappNumber: "",
+  reviewCount: "[# reviews — real customer reviews only]",
 };

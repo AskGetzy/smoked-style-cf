@@ -1,19 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Playfair+Display:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap");
 @import "tailwindcss";
 
 /* Smoked Style: rustic parchment palette */
 @theme {
-  --color-parchment: #f5ecd9;
-  --color-parchment-dark: #eadcbf;
-  --color-paper: #fffaf0;
-  --color-ink: #2b1d14;
-  --color-ink-soft: #6b5545;
-  --color-ember: #a3401f;
-  --color-ember-dark: #82321a;
-  --color-char: #3a2a20;
-  --color-line: #d9c7a5;
+  --color-parchment: #f3eadb;
+  --color-parchment-dark: #e8dcc6;
+  --color-paper: #fbf6ec;
+  --color-ink: #1a120d;
+  --color-ink-soft: #5e4b3c;
+  --color-ember: #c9431c;
+  --color-ember-dark: #8e2c10;
+  --color-char: #1a120d;
+  --color-line: #dccdb4;
   --color-ok: #3f6b3a;
   --color-warn: #a86b12;
+  --color-fire: #e4572e;
+  --color-gold: #f2a93b;
+  --color-slate: #2e221a;
 
   --font-display: "Playfair Display", Georgia, serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
@@ -58,36 +61,20 @@ body {
     @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
 }
 
-/* Diagonal-stripe placeholder used until real photos exist */
-@utility stripe-light {
-  background: repeating-linear-gradient(135deg, #e6d6b8 0 14px, #eadcc3 14px 28px);
-}
+/* Photo placeholder used until real photos exist */
 @utility stripe-dark {
-  background: repeating-linear-gradient(135deg, #2a1d15 0 18px, #33241a 18px 36px);
+  background-color: #2e221a;
+  background-image: repeating-linear-gradient(135deg, rgba(243, 234, 219, 0.05) 0 14px, transparent 14px 28px);
 }
 
-/* Drifting smoke on the logo */
-.smoke-wisp {
-  stroke-dasharray: 38 62;
-  stroke-dashoffset: 38;
-  opacity: 0;
-  animation: smoke-rise 4.2s ease-in-out infinite;
+/* Animated smoke on the logo */
+svg { overflow: visible; }
+.ss-smoke { transform-box: fill-box; transform-origin: 50% 100%; animation: ssRise 3s ease-out infinite; }
+.ss-smoke-2 { animation-delay: 1.5s; animation-duration: 3.4s; }
+@keyframes ssRise {
+  0% { transform: translate(0, 6px) scale(0.9); opacity: 0; }
+  25% { opacity: 1; }
+  60% { transform: translate(2px, -6px) scale(1.05); }
+  100% { transform: translate(-2px, -16px) scale(1.15); opacity: 0; }
 }
-.smoke-sway {
-  transform-origin: 50% 100%;
-  animation: smoke-sway 5s ease-in-out infinite alternate;
-}
-@keyframes smoke-rise {
-  0% { stroke-dashoffset: 38; opacity: 0; }
-  20% { opacity: 0.95; }
-  75% { opacity: 0.6; }
-  100% { stroke-dashoffset: -62; opacity: 0; }
-}
-@keyframes smoke-sway {
-  from { transform: rotate(-4deg) translateX(-2px); }
-  to { transform: rotate(4deg) translateX(2px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .smoke-wisp, .smoke-sway { animation: none; }
-  .smoke-wisp { opacity: 0.8; stroke-dashoffset: 0; stroke-dasharray: none; }
-}
+@media (prefers-reduced-motion: reduce) { .ss-smoke { animation: none; } }

@@ -2,9 +2,18 @@ import Link from "next/link";
 import { listCategories } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { CartLink } from "./CartLink";
-import { Logo } from "./Logo";
+import { Logo, Wordmark } from "./Logo";
 
 export const dynamic = "force-dynamic";
+
+function ShieldCheck({ className, stroke }: { className?: string; stroke: string }) {
+  return (
+    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 3 4 6v6c0 4.5 3.5 8 8 9 4.5-1 8-4.5 8-9V6z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
 
 export default async function ShopLayout({ children }: { children: React.ReactNode }) {
   const categories = await listCategories();
@@ -14,80 +23,118 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
     { href: "/#catering", label: "Catering" },
     { href: "/order", label: "Order status" },
   ];
+  const wa = SITE.whatsappNumber ? `https://wa.me/${SITE.whatsappNumber}` : "/#catering";
+
   return (
-    <div className="flex flex-1 flex-col">
-      {SITE.banner && <div className="bg-char px-4 py-2 text-center text-xs text-parchment">{SITE.banner}</div>}
-      <header className="sticky top-0 z-10 border-b border-line bg-parchment/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
-          <Link href="/" className="flex items-center gap-2 text-char">
-            <Logo className="h-14 w-14" />
-            <span className="sr-only">{SITE.name}</span>
+    <div className="relative flex flex-1 flex-col">
+      {/* Trust bar */}
+      <div className="flex flex-wrap justify-center gap-x-[22px] gap-y-1.5 bg-char px-6 py-2.5 text-sm tracking-wide text-parchment">
+        <span className="inline-flex items-center gap-2">
+          <ShieldCheck stroke="#F2A93B" />
+          <strong>Certified Kosher · CRC</strong>
+        </span>
+        <span aria-hidden="true" className="text-gold">&bull;</span>
+        <span>Hardwood smoked in-house</span>
+        <span aria-hidden="true" className="text-gold">&bull;</span>
+        <span>
+          Pre-order by <strong>{SITE.cutoffDay}</strong> for <strong>{SITE.pickupDay}</strong>
+        </span>
+      </div>
+
+      {/* Nav */}
+      <header className="border-b border-line bg-paper">
+        <nav className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-6 py-4">
+          <Link href="/" aria-label="Smoked Style home" className="flex items-center gap-3.5 text-char">
+            <Logo />
+            <span className="flex flex-col gap-[3px]">
+              <Wordmark />
+              <span className="text-xs uppercase tracking-[0.18em] text-ink-soft">Smokehouse &amp; Catering</span>
+            </span>
           </Link>
-          <div className="flex-1" />
-          <nav className="hidden items-center gap-6 text-sm sm:flex">
+          <div className="flex flex-wrap items-center gap-x-[26px] gap-y-2 text-base font-medium">
+            <Link href="/#holiday" className="py-2.5 font-bold text-ember">
+              Chanukah Specials
+            </Link>
             {nav.map((n) => (
-              <Link key={n.label} href={n.href} className="hover:text-ember">
+              <Link key={n.label} href={n.href} className="py-2.5 text-ink hover:text-ember">
                 {n.label}
               </Link>
             ))}
-          </nav>
-          <CartLink />
-        </div>
-        <nav className="flex gap-4 overflow-x-auto px-4 pb-2 text-sm sm:hidden">
-          {nav.map((n) => (
-            <Link key={n.label} href={n.href} className="whitespace-nowrap">
-              {n.label}
-            </Link>
-          ))}
+            <CartLink />
+          </div>
         </nav>
       </header>
+
       <div className="flex-1">{children}</div>
-      <footer className="border-t border-line">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-4">
-          <div className="space-y-2 md:col-span-1">
-            <div className="flex items-center gap-2 text-char">
-              <Logo className="h-12 w-12" />
-              <span className="font-display text-xl font-bold">{SITE.name}</span>
+
+      {/* Footer */}
+      <footer className="mx-auto w-full max-w-[1280px] px-6 pb-12 pt-16">
+        <div className="flex flex-wrap justify-between gap-10">
+          <div className="flex flex-[1_1_280px] flex-col gap-4">
+            <span className="flex items-center gap-3">
+              <Logo className="h-[51px] w-[54px]" />
+              <Wordmark size="text-[32px]" />
+            </span>
+            <span className="leading-relaxed text-ink-soft">Small-batch smoked meats and catering.</span>
+            <div className="flex items-center gap-3.5">
+              <div
+                role="img"
+                aria-label="Placeholder for the official CRC kosher seal"
+                className="flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-dashed border-[#8c7a68] text-center text-[10px] font-bold text-ink-soft"
+              >
+                [CRC seal]
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <span className="text-[15px] font-bold">Certified Kosher</span>
+                <span className="text-sm text-ink-soft">Under the supervision of the CRC</span>
+              </div>
             </div>
-            <p className="text-sm text-ink-soft">Small-batch smoked meats and catering.</p>
           </div>
-          {(SITE.pickupLocation || SITE.pickupHours) && (
-            <div className="space-y-1 text-sm">
-              <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-ink-soft">Pickup</h4>
-              {SITE.pickupLocation && <p>{SITE.pickupLocation}</p>}
-              {SITE.pickupHours && <p>{SITE.pickupHours}</p>}
-            </div>
-          )}
-          {(SITE.phone || SITE.email) && (
-            <div className="space-y-1 text-sm">
-              <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-ink-soft">Contact</h4>
-              {SITE.phone && <p>{SITE.phone}</p>}
-              {SITE.email && <p>{SITE.email}</p>}
-            </div>
-          )}
-          <div className="space-y-1 text-sm">
-            <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-ink-soft">Shop</h4>
-            {categories.slice(0, 4).map((c) => (
-              <p key={c.id}>
-                <Link href={`/shop/${c.slug}`} className="underline">
-                  {c.name}
-                </Link>
-              </p>
-            ))}
-            <p>
-              <Link href="/order" className="underline">
-                Track an order
+          <FooterCol title="Pickup">
+            <span>{SITE.pickupLocation}</span>
+            <span>{SITE.pickupHours}</span>
+          </FooterCol>
+          <FooterCol title="Contact">
+            <span>{SITE.phone}</span>
+            <span>{SITE.email}</span>
+          </FooterCol>
+          <FooterCol title="Shop">
+            <Link href="/#holiday" className="py-1.5 text-ember underline">{SITE.holidayName[0].toUpperCase() + SITE.holidayName.slice(1)}</Link>
+            {categories.slice(0, 3).map((c) => (
+              <Link key={c.id} href={`/shop/${c.slug}`} className="py-1.5 text-ember underline">
+                {c.name}
               </Link>
-            </p>
-          </div>
+            ))}
+            <Link href="/order" className="py-1.5 text-ember underline">Track an order</Link>
+          </FooterCol>
         </div>
-        <div className="mx-auto flex max-w-6xl justify-between px-4 pb-8 text-xs text-ink-soft sm:px-6">
+        <div className="mt-10 flex justify-between border-t border-line pt-6 text-sm text-ink-soft">
           <span>&copy; {new Date().getFullYear()} {SITE.name}</span>
-          <Link href="/admin" className="underline">
-            Staff
-          </Link>
+          <Link href="/admin" className="underline">Staff</Link>
         </div>
       </footer>
+
+      {/* WhatsApp chat */}
+      <a
+        href={wa}
+        aria-label="Chat with us on WhatsApp"
+        className="fixed bottom-6 right-6 z-10 inline-flex min-h-[52px] items-center gap-2.5 rounded-full bg-[#1f7a4d] pl-4 pr-5 text-[15px] font-bold text-white shadow-[0_10px_28px_rgba(0,0,0,0.25)]"
+      >
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 20l1.4-4A8 8 0 1 1 8 18.6z" />
+          <path d="M9 9.5c.5 2 2.5 4 4.5 4.5l1-1.2 2 .8-.4 1.8c-3.5.3-7.5-3.7-7.2-7.2l1.8-.4.8 2z" />
+        </svg>
+        Chat with us
+      </a>
+    </div>
+  );
+}
+
+function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-[0_1_200px] flex-col gap-2.5 text-base">
+      <span className="mb-1.5 text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">{title}</span>
+      {children}
     </div>
   );
 }

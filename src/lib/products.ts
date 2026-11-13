@@ -18,15 +18,17 @@ export type Product = {
   stock_remaining: number | null;
   low_stock_at: number;
   taxable: boolean;
+  holiday: boolean;
   order_count: number;
   updated_at: string;
 };
 
-type ProductRow = Omit<Product, "photo_keys" | "active" | "needs_approval" | "taxable"> & {
+type ProductRow = Omit<Product, "photo_keys" | "active" | "needs_approval" | "taxable" | "holiday"> & {
   photo_keys: string;
   active: number;
   needs_approval: number;
   taxable: number;
+  holiday: number;
 };
 
 function fromRow(r: ProductRow): Product {
@@ -40,6 +42,7 @@ function fromRow(r: ProductRow): Product {
     active: r.active === 1,
     needs_approval: r.needs_approval === 1,
     taxable: r.taxable === 1,
+    holiday: r.holiday === 1,
   };
 }
 
@@ -117,4 +120,12 @@ export async function getShopProductsByIds(ids: number[]): Promise<ShopProduct[]
 export function maxOrderable(p: Pick<Product, "max_per_order" | "stock_remaining">): number {
   const caps = [p.max_per_order, p.stock_remaining].filter((n): n is number => n !== null);
   return caps.length ? Math.max(0, Math.min(...caps)) : 99;
+}
+
+/** Items flagged as holiday specials in admin. */
+export async function listHolidayProducts(): Promise<ShopProduct[]> {
+  const { results } = await db()
+    .prepare(`${SHOP_SELECT} WHERE p.active = 1 AND p.holiday = 1 ORDER BY p.sort_order, p.name LIMIT 6`)
+    .all<ShopRow>();
+  return results.map((r) => ({ ...fromRow(r), category_name: r.category_name, category_slug: r.category_slug }));
 }
