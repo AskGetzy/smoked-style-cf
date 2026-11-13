@@ -8,6 +8,7 @@ export type OrderRow = {
   due_date: string | null;
   delivery_address: string | null;
   gift_message: string | null;
+  gift_from: string | null;
   notes: string | null;
   subtotal_cents: number;
   tax_cents: number;

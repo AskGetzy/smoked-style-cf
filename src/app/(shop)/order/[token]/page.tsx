@@ -43,7 +43,7 @@ export default async function OrderPage({
           {order.due_date && <> on {order.due_date}</>}
         </p>
         {order.delivery_address && <p className="text-ink-soft">{order.delivery_address}</p>}
-        {order.gift_message && <p className="text-ink-soft">Gift message: {order.gift_message}</p>}
+        {order.gift_message && <p className="text-ink-soft">Gift note: &ldquo;{order.gift_message}&rdquo;{order.gift_from ? ` — ${order.gift_from}` : ""}</p>}
       </div>
       <div className="card space-y-2 p-4">
         <ul className="divide-y divide-line text-sm">

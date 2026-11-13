@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/cf";
 import { paymentUrl } from "@/lib/payments";
 import { getShopProductsByIds, maxOrderable } from "@/lib/products";
+import { GIFT_FROM_MAX, GIFT_MESSAGE_MAX } from "@/lib/zpl";
 import { calcTax, daysUntil, HOLD_WINDOW_DAYS } from "@/lib/tax";
 
 export type CheckoutState = { error?: string; values?: Record<string, string> };
@@ -11,7 +12,7 @@ export type CheckoutState = { error?: string; values?: Record<string, string> };
 export async function placeOrder(_prev: CheckoutState, f: FormData): Promise<CheckoutState> {
   const get = (k: string) => String(f.get(k) ?? "").trim();
   const values = Object.fromEntries(
-    ["name", "email", "phone", "fulfillment", "address", "due_date", "notes", "gift_message", "cart"].map((k) => [k, get(k)]),
+    ["name", "email", "phone", "fulfillment", "address", "due_date", "notes", "gift_message", "gift_from", "cart"].map((k) => [k, get(k)]),
   );
   const fail = (error: string): CheckoutState => ({ error, values });
 
@@ -90,8 +91,8 @@ export async function placeOrder(_prev: CheckoutState, f: FormData): Promise<Che
     const order = await d
       .prepare(
         `INSERT INTO orders (public_token, customer_id, status, source, fulfillment, due_date, delivery_address,
-                             gift_message, notes, subtotal_cents, tax_cents, total_cents, payment_mode)
-         VALUES (?, ?, ?, 'web', ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+                             gift_message, gift_from, notes, subtotal_cents, tax_cents, total_cents, payment_mode)
+         VALUES (?, ?, ?, 'web', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
       )
       .bind(
         token,
@@ -100,7 +101,8 @@ export async function placeOrder(_prev: CheckoutState, f: FormData): Promise<Che
         fulfillment,
         due,
         fulfillment === "delivery" ? get("address") : null,
-        get("gift_message") || null,
+        get("gift_message").slice(0, GIFT_MESSAGE_MAX) || null,
+        get("gift_message") ? get("gift_from").slice(0, GIFT_FROM_MAX) || null : null,
         get("notes") || null,
         subtotal,
         tax,

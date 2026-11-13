@@ -9,6 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   const links = [
     { href: "/admin/products", label: "Products" },
+    { href: "/admin/print", label: "Printing" },
     ...(user.role === "boss" ? [{ href: "/admin/staff", label: "Staff" }] : []),
   ];
 

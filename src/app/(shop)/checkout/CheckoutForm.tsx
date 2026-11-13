@@ -5,6 +5,7 @@ import { useActionState, useEffect, useState } from "react";
 import { getCart, type CartLine } from "@/lib/cart";
 import { formatCents } from "@/lib/format";
 import { calcTax } from "@/lib/tax";
+import { GIFT_FROM_MAX, GIFT_MESSAGE_MAX } from "@/lib/zpl";
 import { placeOrder, type CheckoutState } from "./actions";
 
 type Item = { id: number; name: string; price_cents: number; taxable: boolean; needs_approval: boolean };
@@ -14,6 +15,8 @@ export function CheckoutForm({ today }: { today: string }) {
   const [lines, setLines] = useState<CartLine[] | null>(null);
   const [items, setItems] = useState<Map<number, Item>>(new Map());
   const [fulfillment, setFulfillment] = useState("pickup");
+  const [giftMsg, setGiftMsg] = useState("");
+  const [giftFrom, setGiftFrom] = useState("");
 
   useEffect(() => {
     const local = getCart();
@@ -91,10 +94,47 @@ export function CheckoutForm({ today }: { today: string }) {
             <label className="label" htmlFor="due_date">Date you want it</label>
             <input id="due_date" name="due_date" type="date" required min={today} defaultValue={val("due_date")} className="field" />
           </div>
+        </section>
+
+        <section className="card space-y-4 p-4 sm:p-6">
+          <h2 className="font-display text-xl font-semibold">Gift note (optional)</h2>
+          <p className="text-sm text-ink-soft">We print your message on a card and pack it in the box.</p>
           <div>
-            <label className="label" htmlFor="gift_message">Gift message (optional)</label>
-            <input id="gift_message" name="gift_message" defaultValue={val("gift_message")} className="field" />
+            <label className="label" htmlFor="gift_message">Your message</label>
+            <textarea
+              id="gift_message"
+              name="gift_message"
+              rows={3}
+              maxLength={GIFT_MESSAGE_MAX}
+              value={giftMsg}
+              onChange={(e) => setGiftMsg(e.target.value)}
+              placeholder="Happy Chanukah! Enjoy."
+              className="field"
+            />
+            <p className="mt-1 text-right text-xs text-ink-soft">{giftMsg.length} / {GIFT_MESSAGE_MAX}</p>
           </div>
+          <div>
+            <label className="label" htmlFor="gift_from">From</label>
+            <input
+              id="gift_from"
+              name="gift_from"
+              maxLength={GIFT_FROM_MAX}
+              value={giftFrom}
+              onChange={(e) => setGiftFrom(e.target.value)}
+              placeholder="Your name"
+              className="field"
+            />
+          </div>
+          {giftMsg.trim() && (
+            <div className="mx-auto w-full max-w-xs rounded-md border-t-4 border-fire bg-parchment p-6 text-center shadow-md">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-ink-soft">A gift for you</p>
+              <p className="mt-3 whitespace-pre-line font-display text-lg italic leading-snug">{giftMsg}</p>
+              {giftFrom.trim() && <p className="mt-3 text-sm text-ink-soft">&mdash; {giftFrom}</p>}
+            </div>
+          )}
+        </section>
+
+        <section className="card space-y-4 p-4 sm:p-6">
           <div>
             <label className="label" htmlFor="notes">Notes (optional)</label>
             <textarea id="notes" name="notes" rows={2} defaultValue={val("notes")} className="field" />

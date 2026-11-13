@@ -1,0 +1,18 @@
+[Unit]
+Description=Smoked Style print agent
+After=network-online.target cups.service
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/home/pi/smoked-style-cf/pi
+Environment=SS_URL=https://smoked-style-cf.getzyw89.workers.dev
+Environment=SS_TOKEN=PASTE_THE_SAME_SECRET_AS_PRINT_TOKEN
+Environment=SS_PRINTER=Zebra_ZD621
+Environment=SS_DPI=203
+ExecStart=/usr/bin/python3 /home/pi/smoked-style-cf/pi/print_agent.py
+Restart=always
+RestartSec=5
+User=pi
+
+[Install]
+WantedBy=multi-user.target
