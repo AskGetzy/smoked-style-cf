@@ -2,7 +2,7 @@ import Link from "next/link";
 import { listCategories } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { CartLink } from "./CartLink";
-import { Logo, Wordmark } from "./Logo";
+import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +29,8 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       {/* Nav */}
       <header className="relative border-b border-line bg-paper">
         <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-3.5">
-          <Link href="/" aria-label="Smoked Style home" className="-my-1 flex items-center">
-            <Logo className="h-[84px] w-[84px] min-[820px]:h-[116px] min-[820px]:w-[116px]" />
+          <Link href="/" aria-label="Smoked Style home" className="-my-2 flex items-center">
+            <Logo className="h-[116px] w-[116px] min-[820px]:h-[160px] min-[820px]:w-[160px]" />
           </Link>
           <div className="hidden items-center gap-x-8 text-[13px] font-medium uppercase tracking-[0.14em] min-[820px]:flex">
             {nav.map((n) => (
