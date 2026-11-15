@@ -16,6 +16,7 @@ const CATEGORY_NOTE: Record<string, string> = {
 
 const CATEGORY_PHOTO: Record<string, string> = {
   steaks: "/categories/steaks.jpg",
+  smoked: "/categories/smoked.jpg",
 };
 
 const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
