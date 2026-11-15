@@ -14,6 +14,10 @@ const CATEGORY_NOTE: Record<string, string> = {
   "non-smoked": "Fresh cuts",
 };
 
+const CATEGORY_PHOTO: Record<string, string> = {
+  steaks: "/categories/steaks.jpg",
+};
+
 const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
 const h2 = "font-display text-[34px] leading-none md:text-[52px]";
 const btn = "inline-flex min-h-14 items-center justify-center px-8 font-label text-[19px] font-semibold uppercase tracking-[0.12em]";
@@ -103,7 +107,11 @@ export default async function Home() {
         <div className="grid grid-cols-2 gap-[18px] md:grid-cols-3 lg:grid-cols-5">
           {categories.map((c) => (
             <Link key={c.id} href={`/shop/${c.slug}`} className="flex min-w-0 flex-col border-[3px] border-charcoal bg-paper text-charcoal">
-              <div role="img" aria-label={`Photo placeholder: ${c.name}`} className="stripe-dark aspect-square" />
+              {CATEGORY_PHOTO[c.slug] ? (
+                <img src={CATEGORY_PHOTO[c.slug]} alt={c.name} className="aspect-square w-full object-cover" />
+              ) : (
+                <div role="img" aria-label={`Photo placeholder: ${c.name}`} className="stripe-dark aspect-square" />
+              )}
               <div className="flex flex-col gap-1 border-t-[3px] border-charcoal px-4 py-3.5">
                 <span className="font-display text-xl md:text-[22px]">{c.name}</span>
                 <span className="font-label text-sm uppercase tracking-[0.08em] text-ember">{CATEGORY_NOTE[c.slug] ?? ""}</span>
