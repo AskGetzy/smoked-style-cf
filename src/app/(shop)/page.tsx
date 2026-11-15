@@ -33,9 +33,9 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-4 pb-[110px] pt-16 text-center min-[480px]:px-6 text-parchment">
-        <img src="/brand/hero-bg.webp" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
-        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(20,16,14,0.9) 0%, rgba(20,16,14,0.72) 40%, rgba(20,16,14,0.72) 100%)" }} />
+      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-4 pb-[110px] pt-[72px] text-center min-[480px]:px-6 text-parchment">
+        <img src="/images/hero-jerky-board.jpg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,14,0.86) 0%, rgba(20,16,14,0.70) 45%, rgba(20,16,14,0.80) 100%)" }} />
         <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
           <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.06)" strokeWidth="38" />
           <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.05)" strokeWidth="46" />
