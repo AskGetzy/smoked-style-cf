@@ -29,6 +29,8 @@ export default async function Home() {
     <div>
       {/* Hero */}
       <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-6 pb-24 pt-16 text-center text-parchment">
+        <img src="/brand/hero-bg.webp" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+        <div aria-hidden="true" className="absolute inset-0 bg-deep/80" />
         <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
           <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.06)" strokeWidth="38" />
           <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.05)" strokeWidth="46" />
@@ -49,13 +51,6 @@ export default async function Home() {
           <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Order for this week</Link>
           <Link href="/#catering" className={`${btn} border-2 border-parchment text-parchment hover:bg-parchment hover:text-deep`}>Catering</Link>
         </div>
-        <img
-          src="/brand/hero-board.webp"
-          alt="A smoked meat board with tomahawk, tongue, brisket, pastrami and jerky, plus three dipping sauces"
-          width={1400}
-          height={915}
-          className="relative mt-8 w-full max-w-[980px] drop-shadow-[0_24px_48px_rgba(0,0,0,0.55)]"
-        />
       </section>
 
       {/* Chanukah specials */}
