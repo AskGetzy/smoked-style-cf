@@ -10,6 +10,8 @@ import { QuickAdd } from "./QuickAdd";
 const CATEGORY_PHOTO: Record<string, string> = {
   steaks: "/categories/steaks.jpg",
   smoked: "/categories/smoked.jpg",
+  boards: "/categories/boards.jpg",
+  jerky: "/categories/jerky.jpg",
 };
 
 const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
