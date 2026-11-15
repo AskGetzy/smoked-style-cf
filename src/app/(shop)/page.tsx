@@ -12,6 +12,7 @@ const CATEGORY_PHOTO: Record<string, string> = {
   smoked: "/categories/smoked.jpg",
   boards: "/categories/boards.jpg",
   jerky: "/categories/jerky.jpg",
+  "non-smoked": "/categories/non-smoked.jpg",
 };
 
 const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
