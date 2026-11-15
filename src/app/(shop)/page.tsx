@@ -14,6 +14,12 @@ const CATEGORY_PHOTO: Record<string, string> = {
   "non-smoked": "/categories/non-smoked.jpg",
 };
 
+const HOLIDAY_PHOTOS = [
+  { src: "/holiday/1.jpg", alt: "Fish platter arranged as a dreidel: salmon, tuna, smoked fish and jalapeño slices" },
+  { src: "/holiday/2.jpg", alt: "Round smoked meat platter with sliced tomahawk, jerky and sauces" },
+  { src: "/holiday/3.jpg", alt: "Meat platter arranged as a dreidel with sesame-crusted red edge" },
+];
+
 const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
 const h2 = "font-display text-[34px] leading-none md:text-[52px]";
 const btn = "inline-flex min-h-14 items-center justify-center px-8 font-label text-[19px] font-semibold uppercase tracking-[0.12em]";
@@ -84,9 +90,11 @@ export default async function Home() {
                     </div>
                   </article>
                 ))
-              : ["[Photo — Chanukah board]", "[Photo — holiday jerky box]", "[Photo — holiday platter]"].map((ph) => (
-                  <article key={ph} className="flex min-w-0 flex-col border-[3px] border-deep bg-deep">
-                    <div role="img" aria-label="Photo placeholder" className={`${photoPh} aspect-[4/3]`}>{ph}</div>
+              : HOLIDAY_PHOTOS.map((ph) => (
+                  <article key={ph.src} className="flex min-w-0 flex-col border-[3px] border-deep bg-deep">
+                    <Link href="/shop" className="block">
+                      <img src={ph.src} alt={ph.alt} className="aspect-[4/3] w-full object-cover" />
+                    </Link>
                     <div className="flex items-center justify-between gap-3 px-5 py-[18px]">
                       <div className="flex flex-col gap-1">
                         <span className="font-label text-[22px] font-semibold uppercase tracking-[0.04em] text-parchment">[Holiday board]</span>
