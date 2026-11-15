@@ -1,6 +1,6 @@
 import { db } from "./cf";
 
-export type Category = { id: number; name: string; slug: string; sort_order: number };
+export type Category = { id: number; name: string; slug: string; sort_order: number; photo_key: string | null; note: string };
 
 export type Product = {
   id: number;
@@ -48,7 +48,7 @@ function fromRow(r: ProductRow): Product {
 
 export async function listCategories(): Promise<Category[]> {
   const { results } = await db()
-    .prepare("SELECT id, name, slug, sort_order FROM categories ORDER BY sort_order, name")
+    .prepare("SELECT id, name, slug, sort_order, photo_key, note FROM categories ORDER BY sort_order, name")
     .all<Category>();
   return results;
 }

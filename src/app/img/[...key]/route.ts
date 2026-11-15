@@ -1,10 +1,10 @@
 import { photos } from "@/lib/cf";
 
-// Serves product photos from R2. Keys are unique per upload, so they cache forever.
+// Serves product and category photos from R2. Keys are unique per upload, so they cache forever.
 export async function GET(_req: Request, ctx: { params: Promise<{ key: string[] }> }) {
   const { key } = await ctx.params;
   const path = key.join("/");
-  if (!path.startsWith("products/")) return new Response("Not found", { status: 404 });
+  if (!path.startsWith("products/") && !path.startsWith("categories/")) return new Response("Not found", { status: 404 });
 
   const obj = await photos().get(path);
   if (!obj) return new Response("Not found", { status: 404 });

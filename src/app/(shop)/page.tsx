@@ -6,14 +6,7 @@ import { CateringForm } from "./CateringForm";
 import { Logo } from "./Logo";
 import { QuickAdd } from "./QuickAdd";
 
-const CATEGORY_NOTE: Record<string, string> = {
-  jerky: "Packs & bulk",
-  steaks: "Smoked & raw",
-  boards: "For sharing",
-  smoked: "Ready to eat",
-  "non-smoked": "Fresh cuts",
-};
-
+// Fallback photos shipped with the site; a photo uploaded in Admin → Categories takes priority.
 const CATEGORY_PHOTO: Record<string, string> = {
   steaks: "/categories/steaks.jpg",
   smoked: "/categories/smoked.jpg",
@@ -108,14 +101,14 @@ export default async function Home() {
         <div className="grid grid-cols-2 gap-[18px] md:grid-cols-3 lg:grid-cols-5">
           {categories.map((c) => (
             <Link key={c.id} href={`/shop/${c.slug}`} className="flex min-w-0 flex-col border-[3px] border-charcoal bg-paper text-charcoal">
-              {CATEGORY_PHOTO[c.slug] ? (
-                <img src={CATEGORY_PHOTO[c.slug]} alt={c.name} className="aspect-square w-full object-cover" />
+              {c.photo_key || CATEGORY_PHOTO[c.slug] ? (
+                <img src={c.photo_key ? photoUrl(c.photo_key) : CATEGORY_PHOTO[c.slug]} alt={c.name} className="aspect-square w-full object-cover" />
               ) : (
                 <div role="img" aria-label={`Photo placeholder: ${c.name}`} className="stripe-dark aspect-square" />
               )}
               <div className="flex flex-col gap-1 border-t-[3px] border-charcoal px-4 py-3.5">
                 <span className="font-display text-xl md:text-[22px]">{c.name}</span>
-                <span className="font-label text-sm uppercase tracking-[0.08em] text-ember">{CATEGORY_NOTE[c.slug] ?? ""}</span>
+                <span className="font-label text-sm uppercase tracking-[0.08em] text-ember">{c.note}</span>
               </div>
             </Link>
           ))}
