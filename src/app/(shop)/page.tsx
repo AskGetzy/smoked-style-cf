@@ -3,6 +3,7 @@ import { formatCents } from "@/lib/format";
 import { listCategories, listHolidayProducts, listShopProducts, maxOrderable, photoUrl, stockState } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { CateringForm } from "./CateringForm";
+import { Logo } from "./Logo";
 import { QuickAdd } from "./QuickAdd";
 
 const CATEGORY_NOTE: Record<string, string> = {
@@ -13,11 +14,11 @@ const CATEGORY_NOTE: Record<string, string> = {
   "non-smoked": "Fresh cuts",
 };
 
-const eyebrow = "text-[11px] font-medium uppercase tracking-[0.3em]";
-const h2 = "font-display text-[36px] font-medium leading-[1.1] md:text-[54px]";
-const btn = "inline-flex min-h-[52px] items-center justify-center rounded-[2px] px-8 text-[12px] font-medium uppercase tracking-[0.16em] md:text-[13px]";
-const photoPh = "stripe-dark flex items-end p-4 text-[11px] uppercase tracking-[0.14em] text-[#B3A796]";
-const romans = ["i.", "ii.", "iii."];
+const label = "font-label text-[15px] font-semibold uppercase tracking-[0.24em]";
+const h2 = "font-display text-[34px] leading-none md:text-[52px]";
+const btn = "inline-flex min-h-14 items-center justify-center px-8 font-label text-[19px] font-semibold uppercase tracking-[0.12em]";
+const linkLine = "border-b-2 py-3 font-label text-[17px] font-semibold uppercase tracking-[0.12em]";
+const photoPh = "stripe-dark flex items-end p-3.5 font-label text-xs uppercase tracking-[0.18em] text-[#9c8f80]";
 
 export default async function Home() {
   const [categories, products, holiday] = await Promise.all([listCategories(), listShopProducts(), listHolidayProducts()]);
@@ -26,76 +27,66 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section id="top" className="bg-char text-[#EDE6DA]">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-6 pb-16 pt-14 md:gap-16 md:pb-28 md:pt-24">
-          <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-7">
-            <p className={`${eyebrow} flex items-center gap-4 text-brass`}>
-              <span aria-hidden="true" className="h-px w-10 bg-brass" />
-              Under CRC supervision
-            </p>
-            <h1 className="font-display text-[clamp(48px,7vw,92px)] font-medium leading-[0.98] tracking-[-0.01em]">
-              Low and slow.
-              <br />
-              <em className="font-medium text-brass">Worth the wait.</em>
-            </h1>
-            <p className="max-w-[500px] text-[17px] leading-[1.7] text-[#B3A796]">
-              Real hardwood smoke and real bark, made in small batches. Jerky, smoked steaks and boards, pre-ordered online and
-              picked up fresh.
-            </p>
-            <div className="flex flex-wrap gap-3.5">
-              <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Shop the smokehouse</Link>
-              <Link href="/#catering" className={`${btn} border border-[#EDE6DA]/50 text-[#EDE6DA] hover:border-brass hover:text-brass`}>Catering</Link>
-            </div>
-          </div>
-          <div className="min-w-0 flex-[1_1_480px]">
-            <div role="img" aria-label="Photo placeholder: sliced smoked brisket on dark slate" className={`${photoPh} aspect-[5/4] rounded-[2px]`}>
-              [Hero photo — overhead on dark slate, smoke ring visible]
-            </div>
-            <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-[#B3A796]">
-              {SITE.smokeHours} on the smoke &middot; {SITE.woodType}
-            </p>
-          </div>
+      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-6 pb-20 pt-16 text-center text-parchment">
+        <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
+          <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.10)" strokeWidth="38" />
+          <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.08)" strokeWidth="46" />
+          <path className="wisp wisp-3" d="M610 520 C560 430 680 370 600 260 C550 190 630 130 600 40" stroke="rgba(241,235,225,0.09)" strokeWidth="34" />
+        </svg>
+        <Logo size={280} hi className="relative !h-auto !w-[min(280px,64vw)] drop-shadow-[0_18px_40px_rgba(0,0,0,0.6)]" />
+        <h1 className="relative mt-1.5 font-display text-[clamp(36px,6vw,80px)] leading-none">
+          Kosher never tasted <span className="text-flame">this good.</span>
+        </h1>
+        <p className="relative max-w-[640px] text-[19px] leading-relaxed text-[#cfc3b3]">
+          Brisket, jerky, steaks and boards, smoked low and slow over hardwood since 2015.
+        </p>
+        <div className="relative flex flex-wrap justify-center gap-3 pt-1.5">
+          <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Order for this week</Link>
+          <Link href="/#catering" className={`${btn} border-2 border-parchment text-parchment hover:bg-parchment hover:text-deep`}>Catering</Link>
         </div>
       </section>
 
-      {/* Holiday */}
-      <section id="holiday" className="bg-[#1F1915] text-[#EDE6DA]">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 py-16 md:py-24">
+      {/* Chanukah specials */}
+      <section id="holiday" className="bg-ember text-white">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-[72px]">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="flex flex-col gap-3">
-              <p className={`${eyebrow} text-brass`}>Limited run &middot; order by {SITE.holidayOrderBy}</p>
+            <div className="flex flex-col gap-2.5">
+              <span className={`${label} text-[#ffe2c7]`}>Limited run &middot; order by {SITE.holidayOrderBy}</span>
               <h2 className={h2}>{SITE.holidayHeading}</h2>
             </div>
-            <Link href="/shop" className="py-3 text-xs font-medium uppercase tracking-[0.16em] text-brass">View the collection &rarr;</Link>
+            <Link href="/shop" className={`${linkLine} border-white text-white hover:text-white`}>See all holiday boards</Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {holiday.length > 0
               ? holiday.map((p) => (
-                  <article key={p.id} className="flex min-w-0 flex-col gap-4">
+                  <article key={p.id} className="flex min-w-0 flex-col border-[3px] border-deep bg-deep">
                     <Link href={`/p/${p.slug}`} className="block">
-                      <div className="stripe-dark aspect-[4/3] overflow-hidden rounded-[2px]">
+                      <div className="stripe-dark aspect-[4/3]">
                         {p.photo_keys[0] && <img src={photoUrl(p.photo_keys[0])} alt={p.name} className="h-full w-full object-cover" />}
                       </div>
                     </Link>
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex flex-col gap-1">
-                        <Link href={`/p/${p.slug}`} className="font-display text-2xl font-medium">{p.name}</Link>
-                        <span className="text-sm text-brass">{formatCents(p.price_cents)}</span>
+                    <div className="flex items-center justify-between gap-3 px-5 py-[18px]">
+                      <div className="flex min-w-0 flex-col gap-1">
+                        <Link href={`/p/${p.slug}`} className="font-label text-[22px] font-semibold uppercase tracking-[0.04em] text-parchment">{p.name}</Link>
+                        <span className="font-label text-lg text-flame">{formatCents(p.price_cents)}</span>
                       </div>
                       {stockState(p).kind === "sold_out" ? (
-                        <span className="text-xs uppercase tracking-[0.16em] text-brass">Sold out</span>
+                        <span className="font-label text-base uppercase tracking-[0.1em] text-flame">Sold out</span>
                       ) : (
-                        <QuickAdd id={p.id} max={maxOrderable(p)} label="Pre-order" tone="gold" />
+                        <QuickAdd id={p.id} max={maxOrderable(p)} label="Pre-order" tone="flame" />
                       )}
                     </div>
                   </article>
                 ))
-              : ["[Photo — themed Chanukah board]", "[Photo — jerky gift box]", "[Photo — party platter]"].map((ph) => (
-                  <article key={ph} className="flex min-w-0 flex-col gap-4">
-                    <div role="img" aria-label="Photo placeholder" className={`${photoPh} aspect-[4/3] rounded-[2px]`}>{ph}</div>
-                    <div className="flex flex-col gap-1">
-                      <span className="font-display text-2xl font-medium">[Holiday board name]</span>
-                      <span className="text-sm text-brass">[PRICE]</span>
+              : ["[Photo — Chanukah board]", "[Photo — holiday jerky box]", "[Photo — holiday platter]"].map((ph) => (
+                  <article key={ph} className="flex min-w-0 flex-col border-[3px] border-deep bg-deep">
+                    <div role="img" aria-label="Photo placeholder" className={`${photoPh} aspect-[4/3]`}>{ph}</div>
+                    <div className="flex items-center justify-between gap-3 px-5 py-[18px]">
+                      <div className="flex flex-col gap-1">
+                        <span className="font-label text-[22px] font-semibold uppercase tracking-[0.04em] text-parchment">[Holiday board]</span>
+                        <span className="font-label text-lg text-flame">[PRICE]</span>
+                      </div>
+                      <Link href="/shop" className="inline-flex min-h-[46px] items-center whitespace-nowrap bg-flame px-[18px] font-label text-base font-semibold uppercase tracking-[0.1em] text-deep">Pre-order</Link>
                     </div>
                   </article>
                 ))}
@@ -103,159 +94,152 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section id="shop" className="border-b border-line bg-parchment">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 py-16 md:py-24">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <p className={`${eyebrow} text-ember`}>The smokehouse</p>
-            <h2 className={h2}>Shop by the cut</h2>
-          </div>
-          <div className="flex flex-wrap gap-6">
-            {categories.map((c) => (
-              <Link key={c.id} href={`/shop/${c.slug}`} className="group flex min-w-0 flex-[1_1_200px] flex-col gap-4 text-center text-ink">
-                <div role="img" aria-label={`Photo placeholder: ${c.name}`} className={`${photoPh} aspect-[3/4] rounded-[2px]`}>[Photo]</div>
-                <div className="flex flex-col gap-1">
-                  <span className="font-display text-[26px] font-medium group-hover:text-ember">{c.name}</span>
-                  <span className="text-[11px] uppercase tracking-[0.22em] text-ink-soft">{CATEGORY_NOTE[c.slug] ?? ""}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+      {/* Shop by the cut */}
+      <section id="shop" className="mx-auto flex max-w-[1280px] flex-col gap-9 px-6 pb-16 pt-16 md:pt-[88px]">
+        <div className="flex flex-col items-center gap-2.5 text-center">
+          <span className={`${label} text-ember`}>&bull; From the smoker &bull;</span>
+          <h2 className={h2}>Shop by the cut</h2>
         </div>
-      </section>
-
-      {/* Best sellers */}
-      {best.length > 0 && (
-        <section className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 pb-8 pt-16 md:pt-24">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="flex flex-col gap-3">
-              <p className={`${eyebrow} text-ember`}>Most ordered</p>
-              <h2 className={h2}>Best sellers</h2>
-            </div>
-            <Link href="/shop" className="py-3 text-xs font-medium uppercase tracking-[0.16em] text-ink hover:text-ember">Shop all &rarr;</Link>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {best.map((p) => {
-              const soldOut = stockState(p).kind === "sold_out";
-              return (
-                <article key={p.id} className="flex min-w-0 flex-col gap-4">
-                  <Link href={`/p/${p.slug}`} className="block">
-                    <div className="stripe-dark aspect-square overflow-hidden rounded-[2px]">
-                      {p.photo_keys[0] && (
-                        <img src={photoUrl(p.photo_keys[0])} alt={p.name} className={`h-full w-full object-cover ${soldOut ? "opacity-60" : ""}`} />
-                      )}
-                    </div>
-                  </Link>
-                  <div className="flex flex-1 flex-col gap-2">
-                    {p.category_name && <span className="text-[10px] uppercase tracking-[0.24em] text-ink-soft">{p.category_name}</span>}
-                    <h3 className="font-display text-2xl font-medium leading-tight">
-                      <Link href={`/p/${p.slug}`}>{p.name}</Link>
-                    </h3>
-                    {p.description && <p className="line-clamp-2 text-sm leading-relaxed text-ink-soft">{p.description}</p>}
-                    <span className="text-xs text-ink-soft">[★ rating · # reviews]</span>
-                    <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-                      <span className="text-base font-medium">{formatCents(p.price_cents)}</span>
-                      {soldOut ? <span className="text-xs uppercase tracking-[0.16em] text-ember">Sold out</span> : <QuickAdd id={p.id} max={maxOrderable(p)} />}
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* Add-ons */}
-      <section className="mx-auto max-w-[1280px] px-6 pb-16 md:pb-24">
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-line py-6">
-          <span className="font-display text-2xl italic">Make it a spread &mdash;</span>
-          {["[Sauces]", "[Pickles]", "[Wine]", "[Challah]"].map((a) => (
-            <span key={a} className="py-2 text-xs font-medium uppercase tracking-[0.16em] text-ink">+ {a}</span>
+        <div className="grid grid-cols-2 gap-[18px] md:grid-cols-3 lg:grid-cols-5">
+          {categories.map((c) => (
+            <Link key={c.id} href={`/shop/${c.slug}`} className="flex min-w-0 flex-col border-[3px] border-charcoal bg-paper text-charcoal">
+              <div role="img" aria-label={`Photo placeholder: ${c.name}`} className="stripe-dark aspect-square" />
+              <div className="flex flex-col gap-1 border-t-[3px] border-charcoal px-4 py-3.5">
+                <span className="font-display text-xl md:text-[22px]">{c.name}</span>
+                <span className="font-label text-sm uppercase tracking-[0.08em] text-ember">{CATEGORY_NOTE[c.slug] ?? ""}</span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="border-y border-line bg-paper">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 py-16 md:py-24">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <p className={`${eyebrow} text-ember`}>How it works</p>
-            <h2 className={h2}>Pre-order, then pick up</h2>
+      {/* Best sellers */}
+      <section className="border-y-[3px] border-charcoal bg-paper">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-9 px-6 py-16 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex flex-col gap-2.5">
+              <span className={`${label} text-ember`}>&bull; Most ordered &bull;</span>
+              <h2 className={h2}>Best sellers</h2>
+            </div>
+            <Link href="/shop" className={`${linkLine} border-charcoal text-charcoal hover:text-ember`}>Shop all</Link>
           </div>
-          <ol className="flex flex-wrap gap-10">
-            {[
-              ["Choose your cuts", "Order before the cutoff. Some items are limited each batch, so popular ones can sell out."],
-              ["Check out as a guest", "No account needed. You pay at checkout and get an email link to track your order."],
-              ["Pick up fresh", `Collect on ${SITE.pickupDay} at ${SITE.pickupLocation}. We'll email you when it's ready.`],
-            ].map(([t, d], i) => (
-              <li key={t} className="flex min-w-0 flex-[1_1_260px] flex-col gap-3 border-t border-line pt-6">
-                <span className="font-display text-4xl italic text-brass">{romans[i]}</span>
-                <h3 className="font-display text-[26px] font-medium">{t}</h3>
-                <p className="text-[15px] leading-[1.7] text-ink-soft">{d}</p>
-              </li>
-            ))}
-          </ol>
+          {best.length > 0 && (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {best.map((p) => {
+                const soldOut = stockState(p).kind === "sold_out";
+                return (
+                  <article key={p.id} className="flex min-w-0 flex-col border-[3px] border-charcoal bg-white">
+                    <Link href={`/p/${p.slug}`} className="relative block">
+                      <div className="stripe-dark aspect-square">
+                        {p.photo_keys[0] && (
+                          <img src={photoUrl(p.photo_keys[0])} alt={p.name} className={`h-full w-full object-cover ${soldOut ? "opacity-60" : ""}`} />
+                        )}
+                      </div>
+                      {p.category_name && (
+                        <span className="absolute left-3 top-3 bg-flame px-2.5 py-[5px] font-label text-[13px] font-semibold uppercase tracking-[0.12em] text-deep">{p.category_name}</span>
+                      )}
+                    </Link>
+                    <div className="flex flex-1 flex-col gap-2 p-[18px]">
+                      <h3 className="font-display text-[22px] leading-tight">
+                        <Link href={`/p/${p.slug}`}>{p.name}</Link>
+                      </h3>
+                      {p.description && <p className="line-clamp-2 text-sm leading-normal text-ink-soft">{p.description}</p>}
+                      <span className="text-[13px] text-ink-soft">[★ rating · # reviews]</span>
+                      <div className="mt-auto flex items-center justify-between gap-3 pt-2.5">
+                        <span className="font-label text-[22px] font-semibold">{formatCents(p.price_cents)}</span>
+                        {soldOut ? <span className="font-label text-base uppercase tracking-[0.1em] text-ember">Sold out</span> : <QuickAdd id={p.id} max={maxOrderable(p)} />}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3.5 border-[3px] border-dashed border-charcoal px-6 py-5">
+            <span className="font-display text-[22px]">Make it a spread</span>
+            <div className="flex flex-wrap gap-2.5">
+              {["[Sauces]", "[Pickles]", "[Wine]", "[Challah]"].map((a) => (
+                <span key={a} className="inline-flex min-h-11 items-center border-2 border-charcoal px-4 font-label text-[15px] font-semibold uppercase tracking-[0.1em]">+ {a}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Gifts */}
-      <section id="gifts" className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-6 py-16 md:gap-16 md:py-24">
-        <div role="img" aria-label="Photo placeholder: gift box with printed message card" className="stripe-dark flex aspect-[4/3] min-w-0 flex-[1_1_440px] items-center justify-center rounded-[2px]">
-          <div className="flex w-[58%] flex-col gap-3 border border-brass bg-char p-7 text-[#EDE6DA]">
-            <span className="text-[10px] uppercase tracking-[0.26em] text-brass">A gift for you</span>
-            <span className="font-display text-2xl italic leading-snug">&ldquo;Your message, printed on a card and packed with the order.&rdquo;</span>
-            <span className="text-xs text-[#B3A796]">&mdash; from the sender</span>
+      {/* How pre-ordering works */}
+      <section className="mx-auto flex max-w-[1280px] flex-col gap-11 px-6 py-16 md:py-[88px]">
+        <h2 className={`${h2} text-center`}>How pre-ordering works</h2>
+        <ol className="grid gap-8 md:grid-cols-3">
+          {[
+            ["Pick your cuts", "Order before the cutoff. Each batch is limited, so popular items sell out."],
+            ["Check out as a guest", "No account needed. Pay at checkout and track your order from the link we email you."],
+            ["Pick up fresh", `Collect on ${SITE.pickupDay} at ${SITE.pickupLocation}. We'll email you when it's ready.`],
+          ].map(([t, d], i) => (
+            <li key={t} className="flex flex-col items-center gap-3 text-center">
+              <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-charcoal font-display text-[30px] text-ember">{i + 1}</span>
+              <h3 className="font-label text-[22px] font-semibold uppercase tracking-[0.08em]">{t}</h3>
+              <p className="max-w-[300px] text-[15px] leading-[1.7] text-ink-soft">{d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Gifting */}
+      <section id="gifts" className="border-y-[3px] border-charcoal bg-paper">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-14 px-6 py-16 md:py-[88px]">
+          <div role="img" aria-label="Photo placeholder: gift box with a printed message card" className="stripe-dark flex aspect-[4/3] min-w-0 flex-[1_1_440px] items-center justify-center border-[3px] border-charcoal">
+            <div className="flex w-[58%] flex-col items-center gap-3 border-[3px] border-double border-charcoal bg-parchment p-7 text-center shadow-[0_16px_36px_rgba(0,0,0,0.45)]">
+              <span className="font-label text-[13px] font-semibold uppercase tracking-[0.24em] text-ember">&bull; A gift for you &bull;</span>
+              <span className="text-lg leading-normal">Your message, printed on a card and packed with the order.</span>
+            </div>
           </div>
-        </div>
-        <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-6">
-          <p className={`${eyebrow} text-ember`}>Gifting</p>
-          <h2 className={h2}>A gift they&apos;ll actually eat.</h2>
-          <p className="text-[17px] leading-[1.7] text-ink-soft">
-            Boards and jerky packs make easy gifts. Write a note at checkout and we print it on a card that goes in the box.
-          </p>
-          <ul className="flex flex-col text-[15px]">
-            {["Printed gift message card", "Bulk, Purim and holiday orders welcome", "Certified kosher by CRC"].map((t) => (
-              <li key={t} className="border-t border-line py-3 last:border-b">{t}</li>
-            ))}
-          </ul>
-          <div>
-            <Link href="/shop/boards" className={`${btn} bg-char text-[#EDE6DA] hover:bg-ember`}>Shop gift boards</Link>
+          <div className="flex min-w-0 flex-[1_1_420px] flex-col gap-5">
+            <span className={`${label} text-ember`}>&bull; Gifting &bull;</span>
+            <h2 className="font-display text-[34px] leading-[1.04] md:text-5xl">A gift they&apos;ll actually eat</h2>
+            <p className="text-base leading-[1.7] text-ink-soft">
+              Boards and jerky make an easy gift. Write a note at checkout and we print it on a card that goes in the box.
+            </p>
+            <ul className="flex flex-col gap-2.5 font-label text-lg font-medium uppercase tracking-[0.04em]">
+              {["Printed gift message card", "Bulk, Purim & holiday orders", "Certified kosher · CRC"].map((t) => (
+                <li key={t} className="flex items-center gap-3"><span className="text-ember">&#10005;</span>{t}</li>
+              ))}
+            </ul>
+            <div>
+              <Link href="/shop/boards" className={`${btn} bg-charcoal text-parchment hover:bg-ember`}>Shop gift boards</Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Reviews */}
-      <section className="border-t border-line bg-paper">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-10 px-6 py-16 text-center md:py-24">
-          <div className="flex flex-col items-center gap-3">
-            <p className={`${eyebrow} text-ember`}>Reviews</p>
-            <h2 className={h2}>From our customers</h2>
-            <span className="text-sm text-ink-soft">[★★★★★ · # reviews]</span>
-          </div>
-          <div className="flex w-full flex-wrap gap-6 text-left">
-            {[1, 2, 3].map((i) => (
-              <figure key={i} className="m-0 flex min-w-0 flex-[1_1_280px] flex-col gap-4 border border-dashed border-[#c9bda9] bg-parchment p-7">
-                <blockquote className="m-0 font-display text-2xl italic leading-snug">[Customer review]</blockquote>
-                <figcaption className="text-[11px] uppercase tracking-[0.2em] text-ink-soft">[Customer name] · [Product]</figcaption>
-              </figure>
-            ))}
-          </div>
+      <section className="mx-auto flex max-w-[1280px] flex-col items-center gap-9 px-6 py-16 text-center md:py-[88px]">
+        <div className="flex flex-col items-center gap-3">
+          <span className={`${label} text-ember`}>[★★★★★ · # Google reviews]</span>
+          <h2 className={h2}>Word from the table</h2>
+        </div>
+        <div className="grid w-full gap-5 text-left md:grid-cols-3">
+          {[1, 2, 3].map((i) => (
+            <figure key={i} className="m-0 flex min-w-0 flex-col gap-3.5 border-[3px] border-charcoal bg-paper p-6">
+              <span aria-hidden="true" className="text-xl tracking-[4px] text-flame">★★★★★</span>
+              <blockquote className="m-0 text-[17px] leading-normal">&ldquo;[Real customer review]&rdquo;</blockquote>
+              <figcaption className="font-label text-[15px] font-semibold uppercase tracking-[0.12em] text-ink-soft">[Name] · [Product]</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
       {/* Catering */}
-      <section id="catering" className="bg-char text-[#EDE6DA]">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-12 px-6 py-16 md:gap-16 md:py-28">
-          <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-6">
-            <p className={`${eyebrow} text-brass`}>Catering</p>
-            <h2 className="font-display text-[40px] font-medium leading-[1.05] md:text-[64px]">
-              The smokehouse,
+      <section id="catering" className="bg-deep text-parchment">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-14 px-6 py-16 md:py-[88px]">
+          <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
+            <span className={`${label} text-flame`}>&bull; Catering &bull;</span>
+            <h2 className="font-display text-[34px] leading-none md:text-[56px]">
+              Bring the smoker
               <br />
-              <em className="text-brass">at your table.</em>
+              <span className="text-flame">to your simcha</span>
             </h2>
-            <p className="max-w-[500px] text-[17px] leading-[1.7] text-[#B3A796]">
-              Small catering for gatherings, simchas and office lunches, all under CRC supervision. Tell us the date and
-              headcount and we&apos;ll put a menu together.
+            <p className="max-w-[460px] text-[17px] leading-[1.7] text-[#cfc3b3]">
+              Catering for simchas, gatherings and office lunches, all under CRC supervision. Tell us the date and headcount and we&apos;ll build the menu.
             </p>
           </div>
           <div className="min-w-0 flex-[1_1_420px]">

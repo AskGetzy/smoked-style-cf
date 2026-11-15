@@ -1,25 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-/* Smoked Style: rustic parchment palette */
+/* Smoked Style: charcoal, cream and burnt orange */
 @theme {
-  --color-parchment: #f5f0e6;
-  --color-parchment-dark: #ebe3d3;
-  --color-paper: #fbf8f2;
-  --color-ink: #1c1714;
-  --color-ink-soft: #6b5d50;
-  --color-ember: #9e3a1c;
-  --color-ember-dark: #6e2812;
-  --color-char: #161210;
-  --color-line: #e2d9ca;
+  --color-parchment: #f1ebe1;
+  --color-parchment-dark: #e4dacb;
+  --color-paper: #faf6ef;
+  --color-ink: #2a2523;
+  --color-ink-soft: #5f534a;
+  --color-ember: #b04a1a;
+  --color-ember-dark: #7e3210;
+  --color-char: #1e1a18;
+  --color-deep: #1e1a18;
+  --color-charcoal: #2a2523;
+  --color-line: #ddd2c2;
   --color-ok: #3f6b3a;
   --color-warn: #a86b12;
-  --color-brass: #b08d57;
-  --color-gold: #b08d57;
-  --color-fire: #b08d57;
-  --color-slate: #241d18;
+  --color-flame: #d9822b;
+  --color-brass: #d9822b;
+  --color-gold: #d9822b;
+  --color-fire: #d9822b;
+  --color-slate: #2e2724;
 
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Alfa Slab One", Georgia, serif;
+  --font-label: Oswald, "Arial Narrow", sans-serif;
   --font-sans: Inter, system-ui, sans-serif;
 }
 
@@ -31,7 +35,7 @@ body {
 
 /* Shared UI pieces (Tailwind v4 utilities so they can build on each other) */
 @utility btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm px-4 py-2.5 text-sm font-medium transition disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-4 py-2.5 font-label text-sm font-semibold uppercase tracking-[0.1em] transition disabled:opacity-50;
 }
 
 @utility btn-primary {
@@ -39,7 +43,7 @@ body {
 }
 
 @utility btn-ghost {
-    @apply btn border border-line bg-paper text-ink hover:bg-parchment-dark;
+    @apply btn border-2 border-charcoal bg-paper text-ink hover:bg-parchment-dark;
 }
 
 @utility btn-danger {
@@ -47,7 +51,7 @@ body {
 }
 
 @utility field {
-    @apply w-full rounded-sm border border-line bg-paper px-3 py-2.5 text-base outline-none focus:border-ember focus:ring-2 focus:ring-ember/20;
+    @apply w-full rounded-none border-2 border-charcoal/40 bg-paper px-3 py-2.5 text-base outline-none focus:border-ember focus:ring-2 focus:ring-ember/20;
 }
 
 @utility label {
@@ -55,7 +59,7 @@ body {
 }
 
 @utility card {
-    @apply rounded-sm border border-line bg-paper;
+    @apply rounded-none border-[3px] border-charcoal bg-paper;
 }
 
 @utility badge {
@@ -64,17 +68,21 @@ body {
 
 /* Photo placeholder used until real photos exist */
 @utility stripe-dark {
-  background-color: #241d18;
-  background-image: repeating-linear-gradient(135deg, rgba(237, 230, 218, 0.04) 0 14px, transparent 14px 28px);
+  background-color: #2e2724;
+  background-image: repeating-linear-gradient(135deg, rgba(241, 235, 225, 0.05) 0 12px, transparent 12px 24px);
 }
 
-/* Animated smoke on the logo */
-svg { overflow: visible; }
-.ss-smoke { transform-box: fill-box; transform-origin: 50% 100%; animation: ssRise 3.6s ease-out infinite; }
-.ss-smoke-2 { animation-delay: 1.8s; }
-@keyframes ssRise {
-  0% { transform: translate(0, 4px); opacity: 0; }
-  30% { opacity: 0.9; }
-  100% { transform: translate(-1px, -10px); opacity: 0; }
+/* Headlines: Alfa Slab One, always uppercase (it only has one weight) */
+.font-display { text-transform: uppercase; font-weight: 400; font-synthesis: none; }
+h1, h2, h3 { font-weight: 400; }
+
+/* Hero smoke wisps */
+.wisp { transform-box: fill-box; transform-origin: 50% 100%; animation: wispRise 7s ease-in-out infinite; }
+.wisp-2 { animation-delay: 2.3s; }
+.wisp-3 { animation-delay: 4.6s; }
+@keyframes wispRise {
+  0% { transform: translateY(40px) scaleX(0.9); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(-60px) scaleX(1.15); opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .ss-smoke { animation: none; opacity: 0.8; } }
+@media (prefers-reduced-motion: reduce) { .wisp { animation: none; opacity: 0.6; } }
