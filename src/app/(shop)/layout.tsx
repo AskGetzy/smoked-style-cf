@@ -57,13 +57,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
             <div className="flex flex-[1_1_280px] flex-wrap items-center gap-5">
               <Logo size={150} />
               <div className="flex items-center gap-3">
-                <div
-                  role="img"
-                  aria-label="Placeholder for the official CRC kosher seal"
-                  className="flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-dashed border-ink-soft text-center font-label text-[11px] text-ink-soft"
-                >
-                  [CRC seal]
-                </div>
+                <img src="/brand/crc-seal.png" alt="CRC Kashrus" className="h-[72px] w-auto" />
                 <span className="font-label text-[15px] font-medium uppercase leading-normal tracking-[0.1em]">
                   Certified kosher
                   <br />
