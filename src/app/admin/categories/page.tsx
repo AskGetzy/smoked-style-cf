@@ -12,7 +12,7 @@ export default async function CategoriesPage({ searchParams }: { searchParams: P
     <div className="space-y-5">
       <h1 className="font-display text-3xl">Categories</h1>
       <p className="text-sm text-ink-soft">
-        These are the tiles under &ldquo;Shop by the cut&rdquo; on the homepage. Pick a photo, edit the small caption, or change the order
+        These are the tiles under &ldquo;Shop by category&rdquo; on the homepage. Pick a photo, edit the small caption, or change the order
         (lowest number first). JPG, PNG, WEBP or HEIC, up to 8 MB. Square photos look best.
       </p>
       {saved && <p className="bg-ok/15 px-3 py-2 text-sm text-ok">Saved &ldquo;{saved}&rdquo;.</p>}

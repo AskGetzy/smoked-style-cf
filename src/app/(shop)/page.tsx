@@ -95,11 +95,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Shop by the cut */}
+      {/* Shop by category */}
       <section id="shop" className="mx-auto flex max-w-[1280px] flex-col gap-9 px-6 pb-16 pt-16 md:pt-[88px]">
         <div className="flex flex-col items-center gap-2.5 text-center">
           <span className={`${label} text-ember`}>&bull; From the smoker &bull;</span>
-          <h2 className={h2}>Shop by the cut</h2>
+          <h2 className={h2}>Shop by category</h2>
         </div>
         <div className="grid grid-cols-2 gap-[18px] md:grid-cols-3 lg:grid-cols-5">
           {categories.map((c) => (
