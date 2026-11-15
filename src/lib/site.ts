@@ -14,7 +14,7 @@ export const SITE = {
   holidayHeading: "Chanukah specials",
   holidayOrderBy: "[DATE]",
   // Digits only, with country code, e.g. "13475550100". Empty = the button jumps to the catering form.
-  whatsappNumber: "",
+  whatsappNumber: "17188109472",
   // Optional: full Instagram URL and phone digits (e.g. "13475550100"). Empty = the icon jumps to the catering form.
   instagramUrl: "",
   phoneDigits: "",
