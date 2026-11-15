@@ -15,5 +15,8 @@ export const SITE = {
   holidayOrderBy: "[DATE]",
   // Digits only, with country code, e.g. "13475550100". Empty = the button jumps to the catering form.
   whatsappNumber: "",
+  // Optional: full Instagram URL and phone digits (e.g. "13475550100"). Empty = the icon jumps to the catering form.
+  instagramUrl: "",
+  phoneDigits: "",
   reviewCount: "[# reviews — real customer reviews only]",
 };

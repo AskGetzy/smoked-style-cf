@@ -3,7 +3,6 @@ import { formatCents } from "@/lib/format";
 import { listCategories, listHolidayProducts, listShopProducts, maxOrderable, photoUrl, stockState } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { CateringForm } from "./CateringForm";
-import { Logo } from "./Logo";
 import { QuickAdd } from "./QuickAdd";
 
 // Fallback photos shipped with the site; a photo uploaded in Admin → Categories takes priority.
@@ -28,9 +27,9 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-6 pb-24 pt-16 text-center text-parchment">
+      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-4 pb-[110px] pt-16 text-center min-[480px]:px-6 text-parchment">
         <img src="/brand/hero-bg.webp" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
-        <div aria-hidden="true" className="absolute inset-0 bg-deep/80" />
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(20,16,14,0.9) 0%, rgba(20,16,14,0.72) 40%, rgba(20,16,14,0.72) 100%)" }} />
         <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
           <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.06)" strokeWidth="38" />
           <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.05)" strokeWidth="46" />
@@ -41,14 +40,14 @@ export default async function Home() {
           CRC certified &middot; Since 2015
           <span aria-hidden="true" className="h-0.5 w-5 bg-flame min-[480px]:w-8" />
         </span>
-        <h1 className="relative font-display text-[clamp(42px,6vw,80px)] leading-none">
-          Kosher never tasted <span className="text-flame">this good.</span>
+        <h1 className="relative font-display text-[clamp(40px,10.5vw,80px)] leading-none">
+          Kosher never tasted <span className="text-flame">this&nbsp;good.</span>
         </h1>
         <p className="relative max-w-[640px] text-[19px] leading-relaxed text-[#cfc3b3]">
           Brisket, jerky, steaks and boards, smoked low and slow over hardwood since 2015.
         </p>
         <div className="relative flex flex-wrap justify-center gap-3 pt-1.5">
-          <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Order for this week</Link>
+          <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Shop now</Link>
           <Link href="/#catering" className={`${btn} border-2 border-parchment text-parchment hover:bg-parchment hover:text-deep`}>Catering</Link>
         </div>
       </section>
@@ -58,7 +57,7 @@ export default async function Home() {
         <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-[72px]">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="flex flex-col gap-2.5">
-              <span className={`${label} text-[#ffe2c7]`}>Limited run &middot; order by {SITE.holidayOrderBy}</span>
+              <span className={`${label} text-[#ffe2c7]`}>Limited time &middot; Holiday boards</span>
               <h2 className={h2}>{SITE.holidayHeading}</h2>
             </div>
             <Link href="/shop" className={`${linkLine} border-white text-white hover:text-white`}>See all holiday boards</Link>
@@ -80,7 +79,7 @@ export default async function Home() {
                       {stockState(p).kind === "sold_out" ? (
                         <span className="font-label text-base uppercase tracking-[0.1em] text-flame">Sold out</span>
                       ) : (
-                        <QuickAdd id={p.id} max={maxOrderable(p)} label="Pre-order" tone="flame" />
+                        <QuickAdd id={p.id} max={maxOrderable(p)} label="Add to cart" tone="flame" />
                       )}
                     </div>
                   </article>
@@ -93,7 +92,7 @@ export default async function Home() {
                         <span className="font-label text-[22px] font-semibold uppercase tracking-[0.04em] text-parchment">[Holiday board]</span>
                         <span className="font-label text-lg text-flame">[PRICE]</span>
                       </div>
-                      <Link href="/shop" className="inline-flex min-h-[46px] items-center whitespace-nowrap bg-flame px-[18px] font-label text-base font-semibold uppercase tracking-[0.1em] text-deep">Pre-order</Link>
+                      <Link href="/shop" className="inline-flex min-h-[46px] items-center whitespace-nowrap bg-flame px-[18px] font-label text-base font-semibold uppercase tracking-[0.1em] text-deep">Add to cart</Link>
                     </div>
                   </article>
                 ))}
@@ -177,24 +176,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* How pre-ordering works */}
-      <section className="mx-auto flex max-w-[1280px] flex-col gap-11 px-6 py-16 md:py-[88px]">
-        <h2 className={`${h2} text-center`}>How pre-ordering works</h2>
-        <ol className="grid gap-8 md:grid-cols-3">
-          {[
-            ["Pick your cuts", "Order before the cutoff. Each batch is limited, so popular items sell out."],
-            ["Check out as a guest", "No account needed. Pay at checkout and track your order from the link we email you."],
-            ["Pick up fresh", `Collect on ${SITE.pickupDay} at ${SITE.pickupLocation}. We'll email you when it's ready.`],
-          ].map(([t, d], i) => (
-            <li key={t} className="flex flex-col items-center gap-3 text-center">
-              <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-charcoal font-display text-[30px] text-ember">{i + 1}</span>
-              <h3 className="font-label text-[22px] font-semibold uppercase tracking-[0.08em]">{t}</h3>
-              <p className="max-w-[300px] text-[15px] leading-[1.7] text-ink-soft">{d}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {/* Gifting */}
       <section id="gifts" className="border-y-[3px] border-charcoal bg-paper">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-14 px-6 py-16 md:py-[88px]">
@@ -222,6 +203,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Catering */}
+      <section id="catering" className="bg-deep text-parchment">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-14 px-6 py-16 md:py-[88px]">
+          <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
+            <span className={`${label} text-flame`}>&bull; Catering &bull;</span>
+            <h2 className="font-display text-[34px] leading-none md:text-[56px]">
+              Bring Smoked Style
+              <br />
+              <span className="text-flame">to your simcha</span>
+            </h2>
+            <p className="max-w-[460px] text-[17px] leading-[1.7] text-[#cfc3b3]">
+              Catering for simchas, gatherings and office lunches, all under CRC supervision. Tell us the date and headcount and we&apos;ll build the menu.
+            </p>
+          </div>
+          <div className="min-w-0 flex-[1_1_420px]">
+            <CateringForm />
+          </div>
+        </div>
+      </section>
+
       {/* Reviews */}
       <section className="mx-auto flex max-w-[1280px] flex-col items-center gap-9 px-6 py-16 text-center md:py-[88px]">
         <div className="flex flex-col items-center gap-3">
@@ -236,26 +237,6 @@ export default async function Home() {
               <figcaption className="font-label text-[15px] font-semibold uppercase tracking-[0.12em] text-ink-soft">[Name] · [Product]</figcaption>
             </figure>
           ))}
-        </div>
-      </section>
-
-      {/* Catering */}
-      <section id="catering" className="bg-deep text-parchment">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-start gap-14 px-6 py-16 md:py-[88px]">
-          <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
-            <span className={`${label} text-flame`}>&bull; Catering &bull;</span>
-            <h2 className="font-display text-[34px] leading-none md:text-[56px]">
-              Bring the smoker
-              <br />
-              <span className="text-flame">to your simcha</span>
-            </h2>
-            <p className="max-w-[460px] text-[17px] leading-[1.7] text-[#cfc3b3]">
-              Catering for simchas, gatherings and office lunches, all under CRC supervision. Tell us the date and headcount and we&apos;ll build the menu.
-            </p>
-          </div>
-          <div className="min-w-0 flex-[1_1_420px]">
-            <CateringForm />
-          </div>
         </div>
       </section>
     </div>
