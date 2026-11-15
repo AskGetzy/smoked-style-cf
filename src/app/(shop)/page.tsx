@@ -35,18 +35,13 @@ export default async function Home() {
       {/* Hero */}
       <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-4 pb-[110px] pt-[72px] text-center min-[480px]:px-6 text-parchment">
         <img src="/images/hero-jerky-board.jpg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
-        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,14,0.86) 0%, rgba(20,16,14,0.70) 45%, rgba(20,16,14,0.80) 100%)" }} />
-        <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
-          <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.06)" strokeWidth="38" />
-          <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.05)" strokeWidth="46" />
-          <path className="wisp wisp-3" d="M610 520 C560 430 680 370 600 260 C550 190 630 130 600 40" stroke="rgba(241,235,225,0.06)" strokeWidth="34" />
-        </svg>
-        <span className="relative mt-10 flex items-center gap-2.5 whitespace-nowrap font-label text-[13px] font-semibold uppercase tracking-[0.18em] text-flame min-[480px]:gap-3 min-[480px]:text-[15px] min-[480px]:tracking-[0.24em]">
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,16,14,0.78) 0%, rgba(20,16,14,0.55) 45%, rgba(20,16,14,0.78) 100%)" }} />
+        <span className="relative [text-shadow:0_3px_18px_rgba(0,0,0,0.55)] mt-10 flex items-center gap-2.5 whitespace-nowrap font-label text-[13px] font-semibold uppercase tracking-[0.18em] text-flame min-[480px]:gap-3 min-[480px]:text-[15px] min-[480px]:tracking-[0.24em]">
           <span aria-hidden="true" className="h-0.5 w-5 bg-flame min-[480px]:w-8" />
           CRC certified &middot; Since 2015
           <span aria-hidden="true" className="h-0.5 w-5 bg-flame min-[480px]:w-8" />
         </span>
-        <h1 className="relative font-display text-[clamp(40px,10.5vw,80px)] leading-none">
+        <h1 className="relative [text-shadow:0_3px_18px_rgba(0,0,0,0.55)] font-display text-[clamp(40px,10.5vw,80px)] leading-none">
           Kosher never tasted <span className="text-flame">this&nbsp;good.</span>
         </h1>
         <p className="relative max-w-[640px] text-[19px] leading-relaxed text-[#cfc3b3]">
