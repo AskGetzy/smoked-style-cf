@@ -32,9 +32,9 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
       {/* Header */}
       <header className="relative border-b-[3px] border-charcoal bg-paper">
-        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-2.5">
+        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-2 min-[820px]:py-2.5">
           <Link href="/" aria-label="Smoked Style home" className="flex items-center">
-            <Logo size={84} />
+            <Logo size={84} className="!h-16 !w-16 min-[820px]:!h-[84px] min-[820px]:!w-[84px]" />
           </Link>
           <div className="hidden items-center gap-[30px] font-label text-[17px] font-semibold uppercase tracking-[0.1em] min-[820px]:flex">
             {nav.map((n) => (

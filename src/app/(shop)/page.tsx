@@ -28,14 +28,18 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-6 pb-20 pt-16 text-center text-parchment">
+      <section id="top" className="relative flex flex-col items-center gap-[22px] overflow-hidden bg-deep px-6 pb-24 pt-16 text-center text-parchment">
         <svg aria-hidden="true" width="900" height="520" viewBox="0 0 900 520" className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]" fill="none" strokeLinecap="round">
-          <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.10)" strokeWidth="38" />
-          <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.08)" strokeWidth="46" />
-          <path className="wisp wisp-3" d="M610 520 C560 430 680 370 600 260 C550 190 630 130 600 40" stroke="rgba(241,235,225,0.09)" strokeWidth="34" />
+          <path className="wisp" d="M300 520 C240 420 380 360 300 250 C240 170 330 110 300 20" stroke="rgba(241,235,225,0.06)" strokeWidth="38" />
+          <path className="wisp wisp-2" d="M460 520 C400 410 540 350 450 230 C390 150 480 90 450 0" stroke="rgba(241,235,225,0.05)" strokeWidth="46" />
+          <path className="wisp wisp-3" d="M610 520 C560 430 680 370 600 260 C550 190 630 130 600 40" stroke="rgba(241,235,225,0.06)" strokeWidth="34" />
         </svg>
-        <Logo size={280} hi className="relative !h-auto !w-[min(280px,64vw)] drop-shadow-[0_18px_40px_rgba(0,0,0,0.6)]" />
-        <h1 className="relative mt-1.5 font-display text-[clamp(36px,6vw,80px)] leading-none">
+        <span className="relative mt-10 flex items-center gap-2.5 whitespace-nowrap font-label text-[13px] font-semibold uppercase tracking-[0.18em] text-flame min-[480px]:gap-3 min-[480px]:text-[15px] min-[480px]:tracking-[0.24em]">
+          <span aria-hidden="true" className="h-0.5 w-5 bg-flame min-[480px]:w-8" />
+          CRC certified &middot; Since 2015
+          <span aria-hidden="true" className="h-0.5 w-5 bg-flame min-[480px]:w-8" />
+        </span>
+        <h1 className="relative font-display text-[clamp(42px,6vw,80px)] leading-none">
           Kosher never tasted <span className="text-flame">this good.</span>
         </h1>
         <p className="relative max-w-[640px] text-[19px] leading-relaxed text-[#cfc3b3]">
