@@ -45,6 +45,13 @@ export default async function Home() {
           <Link href="/shop" className={`${btn} bg-ember text-white hover:bg-ember-dark`}>Order for this week</Link>
           <Link href="/#catering" className={`${btn} border-2 border-parchment text-parchment hover:bg-parchment hover:text-deep`}>Catering</Link>
         </div>
+        <img
+          src="/brand/hero-board.webp"
+          alt="A smoked meat board with tomahawk, tongue, brisket, pastrami and jerky, plus three dipping sauces"
+          width={1400}
+          height={915}
+          className="relative mt-8 w-full max-w-[980px] drop-shadow-[0_24px_48px_rgba(0,0,0,0.55)]"
+        />
       </section>
 
       {/* Chanukah specials */}
