@@ -28,7 +28,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
       {/* Nav */}
       <header className="relative border-b border-line bg-paper">
-        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-[13px] min-[820px]:py-[18px]">
+        <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-[10px] min-[820px]:py-[18px]">
           <Link href="/" aria-label="Smoked Style home" className="flex items-center gap-3.5 text-ink">
             <Logo />
             <span className="flex flex-col gap-1">
